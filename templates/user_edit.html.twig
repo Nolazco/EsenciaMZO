@@ -1,8 +1,0 @@
-{% extends 'base.html.twig'  %}
-
-{% block body %}
-<main class="responsive">
-  <h1 class="center-align">{{ user.id is null? 'user.create'|trans : 'user.edit'|trans({'%username%': user.getFullName()}) }}</h1>
-  {% include 'form/user.html.twig' %}
-</main>
-{% endblock %}
