@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<main class="responsive">
+  <article class="no-padding card center">
+    <img class="responsive medium" src="https://previews.123rf.com/images/normaals/normaals2003/normaals200300029/141856997-joy-concept-flat-tiny-person-vector-illustration-happy-people-jumping-and-waving-with-hands-joyful.jpg">
+    <div class="absolute bottom left right padding bottom-shadow white-text">
+      <nav>
+        <h5>{{ 'users'|trans }}</h5>
+        <div class="max"></div>
+        <a href="/users" class="circle transparent">
+          <i>arrow_forward</i>
+        </a>
+      </nav>
+    </div>
+  </article>
+  <article class="no-padding card center">
+    <img class="responsive medium" src="https://st3.depositphotos.com/12889260/34452/v/1600/depositphotos_344527910-stock-illustration-eastern-bazaar-street-market-flat.jpg">
+    <div class="absolute bottom left right padding bottom-shadow white-text">
+      <nav>
+        <h5>{{ 'stands'|trans }}</h5>
+        <div class="max"></div>
+        <a href="/stands" class="circle transparent">
+          <i>arrow_forward</i>
+        </a>
+      </nav>
+    </div>
+  </article>
+  <article class="no-padding card center">
+    <img class="responsive medium" src="https://as1.ftcdn.net/v2/jpg/01/75/91/74/1000_F_175917470_3xJZ6JrUpb8aticmUZwAfpeu8RshPwKI.jpg">
+    <div class="absolute bottom left right padding bottom-shadow white-text">
+      <nav>
+        <h5>{{ 'cities'|trans }}</h5>
+        <div class="max"></div>
+        <a href="/cities" class="circle transparent">
+          <i>arrow_forward</i>
+        </a>
+      </nav>
+    </div>
+  </article>
+</main>
+{% endblock %}
