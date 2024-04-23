@@ -7,6 +7,7 @@ use Lib\Storage\Annotations\Column;
 use Lib\Storage\Annotations\Table;
 use Lib\Storage\Traits\AnnotationMappings;
 use Lib\Storage\Traits\ColumnHydrate;
+use Symfony\Component\HttpFoundation\File\File;
 
 #[Table('users', UserRepo::class)]
 class User extends AbstractEntity{
