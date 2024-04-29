@@ -10,18 +10,20 @@ create table if not exists users(
     email varchar(100) unique,
     bio varchar(255) default null,
     password varchar(60) not null,
-    role enum('1', '2', '3') default '3' not null
+    role enum('1', '2', '3') default '3' not null,
     avatar varchar(128) default null
 )engine=innodb;
+
+insert into users(name, last_name, email, bio, password, role) values('Admin', 'Mzo', 'admin@mzo.mx', 'Administrador de Esencia de Manzanillo', '$2y$10$PReuRWxDbK.IBfVhQ/kpIulMouvcR77fq.WX6w9BCOrOJTtXsy9uO', '1');
 
 create table if not exists gastro(
     id int auto_increment primary key,
     name varchar(100) not null,
     description text not null,
-    delivery boolean not null default true
+    delivery boolean not null default true,
     phone varchar(15) default null,
     menu varchar(128) default null,
-    location varchar(255) not null,
+    location varchar(255) not null
 )engine=innodb;
 
 create table if not exists turismo(

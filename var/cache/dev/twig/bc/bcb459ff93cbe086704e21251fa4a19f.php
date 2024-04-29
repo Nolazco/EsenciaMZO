@@ -57,51 +57,85 @@ class __TwigTemplate_865014d3027b2851667188afe3bd9199 extends Template
 
         // line 3
         echo "<main class=\"responsive\">
-  <article class=\"no-padding card center\">
-    <img class=\"responsive medium\" src=\"https://previews.123rf.com/images/normaals/normaals2003/normaals200300029/141856997-joy-concept-flat-tiny-person-vector-illustration-happy-people-jumping-and-waving-with-hands-joyful.jpg\">
-    <div class=\"absolute bottom left right padding bottom-shadow white-text\">
-      <nav>
-        <h5>";
-        // line 8
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\TranslationExtension']->trans("users"), "html", null, true);
-        echo "</h5>
-        <div class=\"max\"></div>
-        <a href=\"/users\" class=\"circle transparent\">
-          <i>arrow_forward</i>
-        </a>
-      </nav>
-    </div>
+  <article class=\"blur\" style=\"background: url('https://programadestinosmexico.com/wp-content/uploads/2023/09/MANZANILLO-5.jpg'); background-size: cover; color: #821264; font-weight: bold;\">
+    <article class=\"blur\">
+      <h5>Esencia de Manzanillo</h5>
+      <p>El lugar donde encontraras lo más emocinante de este puerto</p>
+    </article>
+    <nav class=\"right-align\">
+      <iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d120649.74663885737!2d-104.41908161928305!3d19.094289482947413!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8424d43417bb3e19%3A0xddb3e9aae7750d4b!2sManzanillo%2C%20Col.!5e0!3m2!1ses!2smx!4v1714370146091!5m2!1ses!2smx\" width=\"400\" height=\"300\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>
+    </nav>
   </article>
-  <article class=\"no-padding card center\">
-    <img class=\"responsive medium\" src=\"https://st3.depositphotos.com/12889260/34452/v/1600/depositphotos_344527910-stock-illustration-eastern-bazaar-street-market-flat.jpg\">
-    <div class=\"absolute bottom left right padding bottom-shadow white-text\">
-      <nav>
-        <h5>";
-        // line 20
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\TranslationExtension']->trans("stands"), "html", null, true);
-        echo "</h5>
-        <div class=\"max\"></div>
-        <a href=\"/stands\" class=\"circle transparent\">
-          <i>arrow_forward</i>
-        </a>
-      </nav>
-    </div>
-  </article>
-  <article class=\"no-padding card center\">
-    <img class=\"responsive medium\" src=\"https://as1.ftcdn.net/v2/jpg/01/75/91/74/1000_F_175917470_3xJZ6JrUpb8aticmUZwAfpeu8RshPwKI.jpg\">
-    <div class=\"absolute bottom left right padding bottom-shadow white-text\">
-      <nav>
-        <h5>";
-        // line 32
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\TranslationExtension']->trans("cities"), "html", null, true);
-        echo "</h5>
-        <div class=\"max\"></div>
-        <a href=\"/cities\" class=\"circle transparent\">
-          <i>arrow_forward</i>
-        </a>
-      </nav>
-    </div>
-  </article>
+  <div class=\"small-divider\"></div>
+  <div>Gastronomia</div>
+  <div class=\"small-divider\"></div>
+  <div class=\"grid center\">
+    ";
+        // line 17
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable((isset($context["gastro"]) || array_key_exists("gastro", $context) ? $context["gastro"] : (function () { throw new RuntimeError('Variable "gastro" does not exist.', 17, $this->source); })()));
+        foreach ($context['_seq'] as $context["_key"] => $context["g"]) {
+            // line 18
+            echo "      <div class=\"s12 m6 l3\">
+        <article class=\"no-padding border round\">
+          <img class=\"responsive small top-round\" src=\"https://uxwing.com/wp-content/themes/uxwing/download/food-and-drinks/meal-food-icon.png\">
+          <div class=\"padding\">
+            <h5>";
+            // line 22
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["g"], "name", [], "any", false, false, false, 22), "html", null, true);
+            echo "</h5>
+            <p>";
+            // line 23
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["g"], "desc", [], "any", false, false, false, 23), "html", null, true);
+            echo "</p>
+            <nav>
+              <button>Ver más</button>
+            </nav>
+          </div>
+        </article>
+      </div>
+    ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['g'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 31
+        echo "  </div>
+  <div class=\"small-divider\"></div>
+  <div>Turismo</div>
+  <div class=\"small-divider\"></div>
+  <div class=\"grid center\">
+    ";
+        // line 36
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable((isset($context["turismo"]) || array_key_exists("turismo", $context) ? $context["turismo"] : (function () { throw new RuntimeError('Variable "turismo" does not exist.', 36, $this->source); })()));
+        foreach ($context['_seq'] as $context["_key"] => $context["t"]) {
+            // line 37
+            echo "      <div class=\"s12 m6 l3\">
+        <article class=\"no-padding border round\">
+          <img class=\"responsive small top-round\" src=\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnS1NrYqeF7LQhCJFQQnCIjbOkiX0DrQYhL5XCMvHLEg&s\">
+          <div class=\"padding\">
+            <h5>";
+            // line 41
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["t"], "name", [], "any", false, false, false, 41), "html", null, true);
+            echo "</h5>
+            <p>";
+            // line 42
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["t"], "desc", [], "any", false, false, false, 42), "html", null, true);
+            echo "</p>
+            <nav>
+              <button>Ver más</button>
+            </nav>
+          </div>
+        </article>
+      </div>
+    ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['t'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 50
+        echo "  </div>
 </main>
 ";
         
@@ -121,7 +155,7 @@ class __TwigTemplate_865014d3027b2851667188afe3bd9199 extends Template
 
     public function getDebugInfo()
     {
-        return array (  96 => 32,  81 => 20,  66 => 8,  59 => 3,  52 => 2,  35 => 1,);
+        return array (  138 => 50,  124 => 42,  120 => 41,  114 => 37,  110 => 36,  103 => 31,  89 => 23,  85 => 22,  79 => 18,  75 => 17,  59 => 3,  52 => 2,  35 => 1,);
     }
 
     public function getSourceContext()
@@ -129,44 +163,55 @@ class __TwigTemplate_865014d3027b2851667188afe3bd9199 extends Template
         return new Source("{% extends 'base.html.twig' %}
 {% block body %}
 <main class=\"responsive\">
-  <article class=\"no-padding card center\">
-    <img class=\"responsive medium\" src=\"https://previews.123rf.com/images/normaals/normaals2003/normaals200300029/141856997-joy-concept-flat-tiny-person-vector-illustration-happy-people-jumping-and-waving-with-hands-joyful.jpg\">
-    <div class=\"absolute bottom left right padding bottom-shadow white-text\">
-      <nav>
-        <h5>{{ 'users'|trans }}</h5>
-        <div class=\"max\"></div>
-        <a href=\"/users\" class=\"circle transparent\">
-          <i>arrow_forward</i>
-        </a>
-      </nav>
-    </div>
+  <article class=\"blur\" style=\"background: url('https://programadestinosmexico.com/wp-content/uploads/2023/09/MANZANILLO-5.jpg'); background-size: cover; color: #821264; font-weight: bold;\">
+    <article class=\"blur\">
+      <h5>Esencia de Manzanillo</h5>
+      <p>El lugar donde encontraras lo más emocinante de este puerto</p>
+    </article>
+    <nav class=\"right-align\">
+      <iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d120649.74663885737!2d-104.41908161928305!3d19.094289482947413!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8424d43417bb3e19%3A0xddb3e9aae7750d4b!2sManzanillo%2C%20Col.!5e0!3m2!1ses!2smx!4v1714370146091!5m2!1ses!2smx\" width=\"400\" height=\"300\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>
+    </nav>
   </article>
-  <article class=\"no-padding card center\">
-    <img class=\"responsive medium\" src=\"https://st3.depositphotos.com/12889260/34452/v/1600/depositphotos_344527910-stock-illustration-eastern-bazaar-street-market-flat.jpg\">
-    <div class=\"absolute bottom left right padding bottom-shadow white-text\">
-      <nav>
-        <h5>{{ 'stands'|trans }}</h5>
-        <div class=\"max\"></div>
-        <a href=\"/stands\" class=\"circle transparent\">
-          <i>arrow_forward</i>
-        </a>
-      </nav>
-    </div>
-  </article>
-  <article class=\"no-padding card center\">
-    <img class=\"responsive medium\" src=\"https://as1.ftcdn.net/v2/jpg/01/75/91/74/1000_F_175917470_3xJZ6JrUpb8aticmUZwAfpeu8RshPwKI.jpg\">
-    <div class=\"absolute bottom left right padding bottom-shadow white-text\">
-      <nav>
-        <h5>{{ 'cities'|trans }}</h5>
-        <div class=\"max\"></div>
-        <a href=\"/cities\" class=\"circle transparent\">
-          <i>arrow_forward</i>
-        </a>
-      </nav>
-    </div>
-  </article>
+  <div class=\"small-divider\"></div>
+  <div>Gastronomia</div>
+  <div class=\"small-divider\"></div>
+  <div class=\"grid center\">
+    {% for g in gastro %}
+      <div class=\"s12 m6 l3\">
+        <article class=\"no-padding border round\">
+          <img class=\"responsive small top-round\" src=\"https://uxwing.com/wp-content/themes/uxwing/download/food-and-drinks/meal-food-icon.png\">
+          <div class=\"padding\">
+            <h5>{{g.name}}</h5>
+            <p>{{g.desc}}</p>
+            <nav>
+              <button>Ver más</button>
+            </nav>
+          </div>
+        </article>
+      </div>
+    {% endfor %}
+  </div>
+  <div class=\"small-divider\"></div>
+  <div>Turismo</div>
+  <div class=\"small-divider\"></div>
+  <div class=\"grid center\">
+    {% for t in turismo %}
+      <div class=\"s12 m6 l3\">
+        <article class=\"no-padding border round\">
+          <img class=\"responsive small top-round\" src=\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnS1NrYqeF7LQhCJFQQnCIjbOkiX0DrQYhL5XCMvHLEg&s\">
+          <div class=\"padding\">
+            <h5>{{t.name}}</h5>
+            <p>{{t.desc}}</p>
+            <nav>
+              <button>Ver más</button>
+            </nav>
+          </div>
+        </article>
+      </div>
+    {% endfor %}
+  </div>
 </main>
 {% endblock %}
-", "home.html.twig", "/home/carlos/Documentos/GitHub/Localito-API/templates/home.html.twig");
+", "home.html.twig", "/home/carlos/Documentos/GitHub/EsenciaMZO/templates/home.html.twig");
     }
 }

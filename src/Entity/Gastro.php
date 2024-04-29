@@ -16,7 +16,7 @@ class Gastro extends AbstractEntity{
     use ColumnHydrate;
 
     #[Column('id')]
-    public int $id;
+    public ?int $id;
 
     #[Column('name')]
     public string $name;

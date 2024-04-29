@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Localito</title>
+    <title>MZO</title>
     <link href="https://cdn.jsdelivr.net/npm/beercss@3.4.0/dist/cdn/beer.min.css" rel="stylesheet">
     <script type="module" src="https://cdn.jsdelivr.net/npm/beercss@3.4.0/dist/cdn/beer.min.js" defer></script>
     <script type="module" src="https://cdn.jsdelivr.net/npm/material-dynamic-colors@1.0.5/dist/cdn/material-dynamic-colors.min.js" defer></script>
@@ -12,36 +12,14 @@
     {% block js %}{% endblock %}
   </head>
   <body class="light">
-  {% if login is not defined %}
-    <header class="responsive fixed">
+    <header>
       <nav>
-      {% if(rol == 'admin') %}
-        <button class="circle transparent" data-ui="#menu-dialog">
-          <i>menu</i>
+        <button class="circle transparent">
+          <i>arrow_back</i>
         </button>
-      {% endif %}
-        <h5 class="max"><a href="/">Localito</a></h5>
-      <a href="/logout" class="button transparent circle"><i>power_settings_new</i></a>
+        <h5 class="max">Escencia de Manzanillo</h5>
       </nav>
     </header>
-    {% if(rol == 'admin') %}
-    <dialog class="left" id="menu-dialog">
-      <header class="fixed">
-        <nav>
-          <button class="transparent circle large" data-ui="#menu-dialog">
-            <i>close</i>
-          </button>
-          <h5 class="max">Localito</h5>
-        </nav>
-      </header>
-      {{ nav_item('home', 'home'|trans, 'home')|raw }}
-      {{ nav_item('users', 'users'|trans, 'people')|raw }}
-      {{ nav_item('stands', 'stands'|trans, 'storefront')|raw }}
-      {{ nav_item('cities', 'cities'|trans, 'explore')|raw }}
-      {{ nav_item('logout', 'logout'|trans, 'power_settings_new')|raw }}
-    </dialog>
-    {% endif %}
-  {% endif %}
     {% block body %}{% endblock %}
   </body>
 </html>

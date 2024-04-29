@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<main class="responsive">
+  <article class="blur" style="background: url('https://programadestinosmexico.com/wp-content/uploads/2023/09/MANZANILLO-5.jpg'); background-size: cover; color: #821264; font-weight: bold;">
+    <article class="blur">
+      <h5>Esencia de Manzanillo</h5>
+      <p>El lugar donde encontraras lo más emocinante de este puerto</p>
+    </article>
+    <nav class="right-align">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d120649.74663885737!2d-104.41908161928305!3d19.094289482947413!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8424d43417bb3e19%3A0xddb3e9aae7750d4b!2sManzanillo%2C%20Col.!5e0!3m2!1ses!2smx!4v1714370146091!5m2!1ses!2smx" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </nav>
+  </article>
+  <div class="small-divider"></div>
+  <div>Gastronomia</div>
+  <div class="small-divider"></div>
+  <div class="grid center">
+    {% for g in gastro %}
+      <div class="s12 m6 l3">
+        <article class="no-padding border round">
+          <img class="responsive small top-round" src="https://uxwing.com/wp-content/themes/uxwing/download/food-and-drinks/meal-food-icon.png">
+          <div class="padding">
+            <h5>{{g.name}}</h5>
+            <p>{{g.desc}}</p>
+            <nav>
+              <button>Ver más</button>
+            </nav>
+          </div>
+        </article>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="small-divider"></div>
+  <div>Turismo</div>
+  <div class="small-divider"></div>
+  <div class="grid center">
+    {% for t in turismo %}
+      <div class="s12 m6 l3">
+        <article class="no-padding border round">
+          <img class="responsive small top-round" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnS1NrYqeF7LQhCJFQQnCIjbOkiX0DrQYhL5XCMvHLEg&s">
+          <div class="padding">
+            <h5>{{t.name}}</h5>
+            <p>{{t.desc}}</p>
+            <nav>
+              <button>Ver más</button>
+            </nav>
+          </div>
+        </article>
+      </div>
+    {% endfor %}
+  </div>
+</main>
+{% endblock %}

@@ -44,7 +44,7 @@ class __TwigTemplate_92d7baed5e0d5fe09f241cb2f30f6a10 extends Template
 <html>
   <head>
     <meta charset=\"UTF-8\">
-    <title>Localito</title>
+    <title>MZO</title>
     <link href=\"https://cdn.jsdelivr.net/npm/beercss@3.4.0/dist/cdn/beer.min.css\" rel=\"stylesheet\">
     <script type=\"module\" src=\"https://cdn.jsdelivr.net/npm/beercss@3.4.0/dist/cdn/beer.min.js\" defer></script>
     <script type=\"module\" src=\"https://cdn.jsdelivr.net/npm/material-dynamic-colors@1.0.5/dist/cdn/material-dynamic-colors.min.js\" defer></script>
@@ -59,69 +59,18 @@ class __TwigTemplate_92d7baed5e0d5fe09f241cb2f30f6a10 extends Template
         // line 13
         echo "  </head>
   <body class=\"light\">
-  ";
-        // line 15
-        if ( !array_key_exists("login", $context)) {
-            // line 16
-            echo "    <header class=\"responsive fixed\">
+    <header>
       <nav>
-      ";
-            // line 18
-            if (((isset($context["rol"]) || array_key_exists("rol", $context) ? $context["rol"] : (function () { throw new RuntimeError('Variable "rol" does not exist.', 18, $this->source); })()) == "admin")) {
-                // line 19
-                echo "        <button class=\"circle transparent\" data-ui=\"#menu-dialog\">
-          <i>menu</i>
+        <button class=\"circle transparent\">
+          <i>arrow_back</i>
         </button>
-      ";
-            }
-            // line 23
-            echo "        <h5 class=\"max\"><a href=\"/\">Localito</a></h5>
-      <a href=\"/logout\" class=\"button transparent circle\"><i>power_settings_new</i></a>
+        <h5 class=\"max\">Escencia de Manzanillo</h5>
       </nav>
     </header>
     ";
-            // line 27
-            if (((isset($context["rol"]) || array_key_exists("rol", $context) ? $context["rol"] : (function () { throw new RuntimeError('Variable "rol" does not exist.', 27, $this->source); })()) == "admin")) {
-                // line 28
-                echo "    <dialog class=\"left\" id=\"menu-dialog\">
-      <header class=\"fixed\">
-        <nav>
-          <button class=\"transparent circle large\" data-ui=\"#menu-dialog\">
-            <i>close</i>
-          </button>
-          <h5 class=\"max\">Localito</h5>
-        </nav>
-      </header>
-      ";
-                // line 37
-                echo $this->extensions['App\Twig\NavigationExtension']->renderItem("home", $this->extensions['Symfony\Bridge\Twig\Extension\TranslationExtension']->trans("home"), "home");
-                echo "
-      ";
-                // line 38
-                echo $this->extensions['App\Twig\NavigationExtension']->renderItem("users", $this->extensions['Symfony\Bridge\Twig\Extension\TranslationExtension']->trans("users"), "people");
-                echo "
-      ";
-                // line 39
-                echo $this->extensions['App\Twig\NavigationExtension']->renderItem("stands", $this->extensions['Symfony\Bridge\Twig\Extension\TranslationExtension']->trans("stands"), "storefront");
-                echo "
-      ";
-                // line 40
-                echo $this->extensions['App\Twig\NavigationExtension']->renderItem("cities", $this->extensions['Symfony\Bridge\Twig\Extension\TranslationExtension']->trans("cities"), "explore");
-                echo "
-      ";
-                // line 41
-                echo $this->extensions['App\Twig\NavigationExtension']->renderItem("logout", $this->extensions['Symfony\Bridge\Twig\Extension\TranslationExtension']->trans("logout"), "power_settings_new");
-                echo "
-    </dialog>
-    ";
-            }
-            // line 44
-            echo "  ";
-        }
-        // line 45
-        echo "    ";
+        // line 23
         $this->displayBlock('body', $context, $blocks);
-        // line 46
+        // line 24
         echo "  </body>
 </html>
 ";
@@ -154,7 +103,7 @@ class __TwigTemplate_92d7baed5e0d5fe09f241cb2f30f6a10 extends Template
 
     }
 
-    // line 45
+    // line 23
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -171,14 +120,9 @@ class __TwigTemplate_92d7baed5e0d5fe09f241cb2f30f6a10 extends Template
         return "base.html.twig";
     }
 
-    public function isTraitable()
-    {
-        return false;
-    }
-
     public function getDebugInfo()
     {
-        return array (  158 => 45,  146 => 12,  134 => 11,  125 => 46,  122 => 45,  119 => 44,  113 => 41,  109 => 40,  105 => 39,  101 => 38,  97 => 37,  86 => 28,  84 => 27,  78 => 23,  72 => 19,  70 => 18,  66 => 16,  64 => 15,  60 => 13,  57 => 12,  55 => 11,  43 => 1,);
+        return array (  107 => 23,  95 => 12,  83 => 11,  74 => 24,  72 => 23,  60 => 13,  57 => 12,  55 => 11,  43 => 1,);
     }
 
     public function getSourceContext()
@@ -187,7 +131,7 @@ class __TwigTemplate_92d7baed5e0d5fe09f241cb2f30f6a10 extends Template
 <html>
   <head>
     <meta charset=\"UTF-8\">
-    <title>Localito</title>
+    <title>MZO</title>
     <link href=\"https://cdn.jsdelivr.net/npm/beercss@3.4.0/dist/cdn/beer.min.css\" rel=\"stylesheet\">
     <script type=\"module\" src=\"https://cdn.jsdelivr.net/npm/beercss@3.4.0/dist/cdn/beer.min.js\" defer></script>
     <script type=\"module\" src=\"https://cdn.jsdelivr.net/npm/material-dynamic-colors@1.0.5/dist/cdn/material-dynamic-colors.min.js\" defer></script>
@@ -197,39 +141,17 @@ class __TwigTemplate_92d7baed5e0d5fe09f241cb2f30f6a10 extends Template
     {% block js %}{% endblock %}
   </head>
   <body class=\"light\">
-  {% if login is not defined %}
-    <header class=\"responsive fixed\">
+    <header>
       <nav>
-      {% if(rol == 'admin') %}
-        <button class=\"circle transparent\" data-ui=\"#menu-dialog\">
-          <i>menu</i>
+        <button class=\"circle transparent\">
+          <i>arrow_back</i>
         </button>
-      {% endif %}
-        <h5 class=\"max\"><a href=\"/\">Localito</a></h5>
-      <a href=\"/logout\" class=\"button transparent circle\"><i>power_settings_new</i></a>
+        <h5 class=\"max\">Escencia de Manzanillo</h5>
       </nav>
     </header>
-    {% if(rol == 'admin') %}
-    <dialog class=\"left\" id=\"menu-dialog\">
-      <header class=\"fixed\">
-        <nav>
-          <button class=\"transparent circle large\" data-ui=\"#menu-dialog\">
-            <i>close</i>
-          </button>
-          <h5 class=\"max\">Localito</h5>
-        </nav>
-      </header>
-      {{ nav_item('home', 'home'|trans, 'home')|raw }}
-      {{ nav_item('users', 'users'|trans, 'people')|raw }}
-      {{ nav_item('stands', 'stands'|trans, 'storefront')|raw }}
-      {{ nav_item('cities', 'cities'|trans, 'explore')|raw }}
-      {{ nav_item('logout', 'logout'|trans, 'power_settings_new')|raw }}
-    </dialog>
-    {% endif %}
-  {% endif %}
     {% block body %}{% endblock %}
   </body>
 </html>
-", "base.html.twig", "/home/carlos/Documentos/GitHub/Localito-API/templates/base.html.twig");
+", "base.html.twig", "/home/carlos/Documentos/GitHub/EsenciaMZO/templates/base.html.twig");
     }
 }

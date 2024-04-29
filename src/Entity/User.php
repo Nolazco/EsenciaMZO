@@ -15,7 +15,7 @@ class User extends AbstractEntity{
     use ColumnHydrate;
 
     #[Column('id')]
-    public int $id;
+    public ?int $id;
 
     #[Column('name')]
     public string $name;
@@ -89,6 +89,12 @@ class User extends AbstractEntity{
     public function getFullName(string $format = '%s %s'): string
     {
         return sprintf($format, $this->name, $this->lastName);
+    }
+
+    public function setPassword(?string $password): static
+    {
+        $this->password = $password;
+        return $this;
     }
 
     public function setPasswordHash(string $password): static
