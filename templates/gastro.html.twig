@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+{% block js %}
+  <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2Un0K2IL2UONMo6BEnWAgLq7Nw9uOxWo&callback=console.debug&libraries=maps,marker&v=beta"></script>
+  {% endblock %}
+{% block css %}
+  <style>
+    gmp-map {
+      height: 100%;
+    }
+  </style>
+{% endblock %}
+{% block body %}
+  <main class="responsive">
+    <div class="grid justify-center align-center">
+      <div class="s12 flex justify-center align-center text-center my-mid2">
+        <h2>{{ gastro.name }}</h2>
+        <div class="row">
+          <b>Descripción:</b>
+          <div class="max">{{ gastro.desc }}</div>
+        </div>
+        <div class="medium-divider"></div>
+        <div class="row">
+          <b>Información:</b>
+          <div class="max">{{ gastro.body }}</div>
+        </div>
+        <div class="medium-divider"></div>
+        <div class="row">
+          <b>¿Entrega a domicilio?:</b>
+          <div class="max">{{ gastro.delivery == 1 ? 'Si' : 'No' }}</div>
+        </div>
+        <div class="medium-divider"></div>
+        <div class="row">
+          <b>Telefono:</b>
+          <div class="max">{{ gastro.phone is null ? 'XXX' : gastro.phone }}</div>
+        </div>
+        <div class="medium-divider"></div>
+        <div class="row">
+          <b>Ubicación:</b>
+          <div class="max">
+          <gmp-map center="40.12150192260742,-100.45039367675781" zoom="14" map-id="DEMO_MAP_ID">
+                <gmp-advanced-marker position="40.12150192260742,-100.45039367675781" title="My location"></gmp-advanced-marker>
+              </gmp-map>
+          </div>
+        </div>
+        <div class="medium-divider"></div>
+        <a class="button app-back fill">Volver</a>
+      </div>
+    </div>
+  </main>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <main class="responsive mb-small">
+    <h1 class="center-align">{{ 'Gastronomia' }}</h1>
+    {% if gastro %}
+      <table class="border striped responsive">
+        <thead>
+          <tr>
+            <th class="bold">Nombre</th>
+            <th class="bold">Descripción</th>
+            <th class="bold">Entrega a domicilio</th>
+            <th class="bold">Ubicación</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for g in gastro %}
+            {% set rowClass = loop.index is even ? 'even' : 'odd' %}
+            <tr class="flex {{ rowClass }}">
+              <td>{{ g.name }}</td>
+              <td>{{ g.desc }}</td>
+              <td>{{ g.delivery == 1 ? 'Si' : 'No' }}</td>
+              <td>{{ g.location }}</td>
+              <td>
+                <div class="button-group">
+                  <a href="/gastronomia/{{ g.id }}" class="button info circle medium"><i>visibility</i></a>
+                  <a href="/gastronomia/{{ g.id }}/edit" class="button warning circle medium"><i>edit</i></a>
+                  <a href="#" data-ui="#delete-{{g.id}}" class="button danger circle medium"><i>delete</i></a>
+                </div>
+              </td>
+            </tr>
+
+            <dialog class="modal" id="delete-{{g.id}}">
+              <h5>¿Desea elimiar a {{g.name}}?</h5>
+              <div>Some text here</div>
+              <nav class="right-align no-space">
+                <button class="transparent link" data-ui="#delete-{{g.id}}">Cancelar</button>
+                <a class="transparent link" href="/gastronomia/{{ g.id }}/delete">Confirmar</a>
+              </nav>
+            </dialog>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <article class="border medium no-padding middle-align center-align">
+        <div class="padding">
+          <h5>{{ 'table.empty'|trans }}<h5>
+        </div>
+      </article>
+    {% endif %}
+
+    <nav class="pagination">
+      {% if page > 1 %}
+        <a href="?page={{ page - 1}}" class="button transparent circle"><i>chevron_left</i></a>
+      {% else %}
+        <a disabled class="button transparent circle"><i>chevron_left</i></a>
+      {% endif %}
+      {{ page }}
+      <a href="?page={{ page + 1 }}" class="button transparent circle"><i>chevron_right</i></a>
+      <div class="my-mid">
+        <a class="button success" href="/gastronomia/new">
+          <i>add</i>
+          <span>Agregar</span>
+        </a>
+      </div>
+    </nav>
+  </main>
+{% endblock %}

@@ -2,7 +2,7 @@
 {% trans_default_domain 'form' %}
 
 {%- block form_row -%}
-  <div class="field label border {{errors is empty? '' : 'invalid'}}">
+  <div class="field {{ textArea is defined ? 'textarea' : '' }} label border {{errors is empty? '' : 'invalid'}}">
     {{- form_widget(form) -}}
     {{- form_label(form) -}}
     {% if not (errors is empty) %}

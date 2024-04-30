@@ -31,7 +31,6 @@ class Index extends AbstractController
     public function home(): Response{
         $gastro = $this->gastroModel->all();
         $turismo = $this->turismoModel->all();
-        #return $this->redirectToRoute('dashboard');
         return $this->render('home.html.twig', [
             'gastro' => $gastro,
             'turismo' => $turismo

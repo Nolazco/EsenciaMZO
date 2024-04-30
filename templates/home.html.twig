@@ -14,25 +14,30 @@
   <div>Gastronomia</div>
   <div class="small-divider"></div>
   <div class="grid center">
-    {% for g in gastro %}
-      <div class="s12 m6 l3">
-        <article class="no-padding border round">
-          <img class="responsive small top-round" src="https://uxwing.com/wp-content/themes/uxwing/download/food-and-drinks/meal-food-icon.png">
-          <div class="padding">
-            <h5>{{g.name}}</h5>
-            <p>{{g.desc}}</p>
-            <nav>
-              <button>Ver más</button>
-            </nav>
-          </div>
-        </article>
-      </div>
-    {% endfor %}
+    {% if gastro %}
+      {% for g in gastro %}
+        <div class="s12 m6 l3">
+          <article class="no-padding border round">
+            <img class="responsive small top-round" src="https://uxwing.com/wp-content/themes/uxwing/download/food-and-drinks/meal-food-icon.png">
+            <div class="padding">
+              <h5>{{g.name}}</h5>
+              <p>{{g.desc}}</p>
+              <nav>
+                <button>Ver más</button>
+              </nav>
+            </div>
+          </article>
+        </div>
+      {% endfor %}
+    {% else %}
+      No hay nada xd
+    {% endif %}
   </div>
   <div class="small-divider"></div>
   <div>Turismo</div>
   <div class="small-divider"></div>
   <div class="grid center">
+  {% if turismo %}
     {% for t in turismo %}
       <div class="s12 m6 l3">
         <article class="no-padding border round">
@@ -47,6 +52,9 @@
         </article>
       </div>
     {% endfor %}
+  {% else %}
+    No hay nada xd
+  {% endif %}
   </div>
 </main>
 {% endblock %}

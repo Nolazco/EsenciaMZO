@@ -20,6 +20,7 @@ create table if not exists gastro(
     id int auto_increment primary key,
     name varchar(100) not null,
     description text not null,
+    body text not null,
     delivery boolean not null default true,
     phone varchar(15) default null,
     menu varchar(128) default null,
@@ -30,6 +31,7 @@ create table if not exists turismo(
     id int auto_increment primary key,
     name varchar(100) not null,
     description text not null,
+    body text not null,
     location varchar(255) not null
 )engine=innodb;
 
@@ -37,6 +39,7 @@ create table if not exists turismo(
     id int auto_increment primary key,
     name varchar(100) not null,
     description text not null,
+    body text not null,
     location varchar(255) not null,
     attach varchar(255) not null
 )engine=innodb;

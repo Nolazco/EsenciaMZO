@@ -1,0 +1,8 @@
+{% extends 'base.html.twig'  %}
+
+{% block body %}
+<main class="responsive">
+  <h1 class="center-align">{{ gastro.id is null ? 'Nuevo' : 'Editar'}}</h1>
+  {% include 'form/gastro.html.twig' %}
+</main>
+{% endblock %}

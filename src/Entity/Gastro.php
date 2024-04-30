@@ -24,11 +24,14 @@ class Gastro extends AbstractEntity{
     #[Column('description')]
     public string $description;
 
+    #[Column('body')]
+    public string $body;
+
     #[Column('delivery')]
     public bool $delivery = true;
 
     #[Column('phone')]
-    public string $phone;
+    public ?string $phone;
 
     #[Column('menu', 'getMenuUri', 'setMenuFromUri')]
     public ?File $menu = null;
@@ -40,8 +43,8 @@ class Gastro extends AbstractEntity{
         $this->id = $id;
         return $this;
     }
-    public function getId(): int{
-        return $this->id;
+    public function getId(): ?int{
+        return $this->id ?? null;
     }
 
     public function setName(string $name): static{
@@ -62,6 +65,15 @@ class Gastro extends AbstractEntity{
         return $this->description;
     }
 
+    public function setBody(string $body): static{
+        $this->body = $body;
+        return $this;
+    }
+
+    public function getBody(): string{
+        return $this->body;
+    }
+
     public function setDeli(bool $delivery): static{
         $this->delivery = $delivery;
         return $this;
@@ -76,8 +88,8 @@ class Gastro extends AbstractEntity{
         return $this;
     }
 
-    public function getPhone(): string{
-        return $this->phone;
+    public function getPhone(): ?string{
+        return $this->phone ?? null;
     }
 
     public function setLocation(string $location): static{
