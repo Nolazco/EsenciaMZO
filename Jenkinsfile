@@ -18,8 +18,9 @@ pipeline {
         }
         stage('Build') {
             steps {
+                sh 'php bin/console cache:clear --env=prod'
+                sh 'symfony server:start'
                 // Aquí puedes agregar comandos para compilar tu proyecto Symfony, como por ejemplo:
-                // sh 'php bin/console cache:clear --env=prod'
             }
         }
         stage('Deploy') {
