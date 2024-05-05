@@ -14,6 +14,7 @@ pipeline {
         stage('Run tests') {
             steps {
                 //sh 'php bin/phpunit'
+                sh 'symfony server:start'
             }
         }
         stage('Build') {
