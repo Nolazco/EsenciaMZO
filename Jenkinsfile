@@ -25,6 +25,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
+                sh 'symfony server:start'
                 // Aquí puedes agregar comandos para implementar tu proyecto Symfony, si es necesario.
             }
         }
