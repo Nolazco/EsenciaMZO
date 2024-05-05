@@ -16,16 +16,9 @@ pipeline {
                 sh 'composer install'
             }
         }
-        stage('Run tests') {
-            steps {
-                //sh 'php bin/phpunit'
-                sh 'symfony server:start'
-            }
-        }
         stage('Build') {
             steps {
                 sh 'php bin/console cache:clear --env=prod'
-                sh 'symfony server:start'
                 // Aquí puedes agregar comandos para compilar tu proyecto Symfony, como por ejemplo:
             }
         }
