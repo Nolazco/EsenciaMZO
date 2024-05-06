@@ -24,7 +24,7 @@ class User extends AbstractEntity{
     public string $lastName;
 
     #[Column('nickname')]
-    public string $nickname;
+    public ?string $nickname = null;
 
     #[Column('email')]
     public string $email;
@@ -36,9 +36,9 @@ class User extends AbstractEntity{
     public string $password;
 
     #[Column('role')]
-    public bool $role = true;
+    public int $role;
 
-    #[Column('avatar', 'getImageUri', 'setImageFromUri')]
+    #[Column('avatar', 'getAvatarUri', 'setAvatarFromUri')]
     public ?File $avatar = null;
 
     public function setId(int $id): static{
@@ -46,8 +46,8 @@ class User extends AbstractEntity{
         return $this;
     }
 
-    public function getId(): int{
-        return $this->id;
+    public function getId(): ?int{
+        return $this->id ?? null;
     }
 
     public function setName(string $name): static{
@@ -73,8 +73,8 @@ class User extends AbstractEntity{
         return $this;
     }
 
-    public function getNickname(): string{
-        return $this->nickname;
+    public function getNickname(): ?string{
+        return $this->nickname ?? null;
     }
 
     public function setEmail(string $email): static{
