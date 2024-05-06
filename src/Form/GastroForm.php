@@ -33,8 +33,8 @@ class GastroForm extends AbstractType{
             ->add('delivery', ChoiceType::class, [
                 'label' => '¿Entrega a domicilio?',
                 'choices' => [
-                    'Si' => true,
-                    'No' => false
+                    'Si' => "true",
+                    'No' => "false"
                 ],
                 'required' => true
             ])
