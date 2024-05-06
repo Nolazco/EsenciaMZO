@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Gastro;
 use App\Entity\Turismo;
 use App\Entity\User;
+use App\Form\LoginForm;
+use App\Form\UserForm;
 use App\Model\GastroRepo;
 use App\Model\TurismoRepo;
 use App\Model\UserRepo;
@@ -28,13 +30,104 @@ class Index extends AbstractController
     }
 
     #[Route(name: 'home', path: '/', methods: 'GET')]
-    public function home(): Response{
-        $gastro = $this->gastroModel->all();
-        $turismo = $this->turismoModel->all();
-        return $this->render('home.html.twig', [
-            'gastro' => $gastro,
-            'turismo' => $turismo
+    public function home(Request $r): Response{
+        $sess = $r->getSession();
+        $gastro = $this->gastroModel->getLastThree();
+        $turismo = $this->turismoModel->getLastThree();
+
+        if($sess->has('login')){
+            return $this->render('visitor/home.html.twig', [
+                'gastro' => $gastro,
+                'turismo' => $turismo,
+                'name' => $sess->get('name'),
+                'rol' => $sess->get('role'),
+                'loged' => true
+            ]);
+        }else{
+            return $this->render('visitor/home.html.twig', [
+                'gastro' => $gastro,
+                'turismo' => $turismo,
+                'loged' => false
+            ]);
+        }
+    }
+
+    #[Route(name: 'register', path: '/register', methods: ['GET', 'POST'])]
+    public function register(Request $r): Response{
+        $user = new User();
+        $form = $this->createForm(UserForm::class, $user, ['new' => true]);
+        $form->handleRequest($r);
+
+        if($form->isSubmitted() && $form->isValid()){
+            if(!empty($user->avatar)){
+                $avatar = $user->avatar->move('avatars', uniqid().".{$user->avatar->guessExtension()}");
+                $user->avatar = $avatar;
+            }
+            $user->setPasswordHash($user->password);
+            $this->userModel->save($user);
+
+            return $this->redirectToRoute('login');
+
+        }
+
+        return $this->render('user_edit.html.twig', [
+            'user' => $user,
+            'form' => $form,
+            'new' => true,
+            'rol' => $r->getSession()->get('role')
         ]);
+    }
+
+    #[Route(name: 'login', path: '/login', methods: ['GET', 'POST'])]
+    public function login(Request $r): Response{
+        $sess = $r->getSession();
+        $user = new User();
+
+        if($sess->has('login'))
+            return $this->redirectToRoute('home');
+
+        $form = $this->createForm(LoginForm::class);
+        $form->handleRequest($r);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $email = $form->get('email')->getData();
+            $password = $form->get('password')->getData();
+            $user = $this->userModel->getByEmail($email);
+
+            //dd($user);
+
+            if(!$user)
+                $form->addError(new FormError('Credenciales incorrectas'));
+            else{
+                $dbPass = $user->password;
+
+                if(password_verify($password, $dbPass)){
+                    //dd($user);
+                    if($user->nickname != null)
+                        $sess->set('name', $user->nickname);
+                    else
+                        $sess->set('name', $user->name);
+
+                    $sess->set('login', $user->id);
+                    $sess->set('role', $user->role);
+
+                    return $this->redirectToRoute('home');
+                }
+            }
+
+            $form->addError(new FormError('Credenciales incorrectas'));
+        }
+
+        return $this->render('login.html.twig', [
+            'form' => $form,
+            'login' => true
+        ]);
+    }
+
+    #[Route(name: 'logout', path: '/logout', methods: 'GET')]
+    public function logout(Request $r): Response{
+        $sess = $r->getSession()->remove('login');
+        return $this->redirectToRoute('home');
     }
 
     #[Route(name: 'dashboard', path: '/dashboard', methods: 'GET')]
