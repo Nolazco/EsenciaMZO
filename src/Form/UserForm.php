@@ -47,8 +47,8 @@ class UserForm extends AbstractType
                 'type' => PasswordType::class,
                 'invalid_message' => 'password.not_match',
                 'required' => $options['new'],
-                'first_options'  => ['label' => 'input.password'],
-                'second_options' => ['label' => 'input.repeated_password'],
+                'first_options'  => ['label' => 'Contraseña'],
+                'second_options' => ['label' => 'Confirmar contraseña'],
 
             ])
             ->add('avatar', FileType::class, [
