@@ -1,6 +1,6 @@
 {% form_theme form 'form/beer_theme.html.twig'  %}
 {{ form_start(form, { attr: { id: 'user_form' }}) }}
-{% set avatar = form.vars.value.avatar is empty? 'user-default.svg' : form.vars.value.avatar.getPathname() %} 
+{% set avatar = form.vars.value.avatar is empty ? 'user-default.svg' : form.vars.value.avatar.getPathname() %} 
 <div class="grid" style="display: flex; align-items: center; justify-content: center;"> {# Use Flexbox to center content #}
   <div class="s3">
     <a class="button transparent circle big">
@@ -11,8 +11,9 @@
   <div class="s4">
     {{ form_row(form.name) }}
     {{ form_row(form.lastName) }}
-    {{ form_row(form.phone) }}
+    {{ form_row(form.nickname) }}
     {{ form_row(form.email) }}
+    {{ form_row(form.bio, {textArea: true}) }}
     <div class="medium-divider"></div>
     {% if new == false %}
       <span>Campo opcional</span>
