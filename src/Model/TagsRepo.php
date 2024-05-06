@@ -6,4 +6,3 @@ use Lib\Storage\AbstractModel;
 class TagsRepo extends AbstractModel{
     
 }
-?>
