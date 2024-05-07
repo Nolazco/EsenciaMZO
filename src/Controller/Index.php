@@ -32,7 +32,7 @@ class Index extends AbstractController
     #[Route(name: 'home', path: '/', methods: 'GET')]
     public function home(Request $r): Response{
         $sess = $r->getSession();
-        $gastro = $this->gastroModel->getLastThree();
+        $gastro = $this->gastroModel->all();
         $turismo = $this->turismoModel->getLastThree();
 
         if($sess->has('login')){
