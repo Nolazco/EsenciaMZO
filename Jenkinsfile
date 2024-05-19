@@ -30,31 +30,37 @@ pipeline {
     post {
         always {
             script {
-                // Enviar notificación por correo electrónico siempre
+                // Configuración del remitente y destinatarios
                 emailext (
-                    subject: "Build \${currentBuild.fullDisplayName}",
-                    body: "Build \${currentBuild.fullDisplayName} finished with status: \${currentBuild.currentResult}",
-                    recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+                    subject: "Build ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                    body: """<p>Build ${env.JOB_NAME} #${env.BUILD_NUMBER} finished with status: ${currentBuild.currentResult}</p>
+                             <p>Check console output at <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>""",
+                    to: 'cnolazco@ucol.mx',
+                    from: 'cnolazco@ucol.mx',
                 )
             }
         }
         success {
             script {
-                // Enviar notificación por correo electrónico solo en caso de éxito
+                // Notificación en caso de éxito
                 emailext (
-                    subject: "SUCCESS: Build \${currentBuild.fullDisplayName}",
-                    body: "Build \${currentBuild.fullDisplayName} finished successfully.",
-                    recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+                    subject: "SUCCESS: Build ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                    body: """<p>Build ${env.JOB_NAME} #${env.BUILD_NUMBER} finished successfully.</p>
+                             <p>Check console output at <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>""",
+                    to: 'cnolazco@ucol.mx',
+                    from: 'cnolazco@ucol.mx',
                 )
             }
         }
         failure {
             script {
-                // Enviar notificación por correo electrónico solo en caso de fallo
+                // Notificación en caso de fallo
                 emailext (
-                    subject: "FAILURE: Build \${currentBuild.fullDisplayName}",
-                    body: "Build \${currentBuild.fullDisplayName} failed.",
-                    recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+                    subject: "FAILURE: Build ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                    body: """<p>Build ${env.JOB_NAME} #${env.BUILD_NUMBER} failed.</p>
+                             <p>Check console output at <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>""",
+                    to: 'cnolazco@ucol.mx',
+                    from: 'cnolazco@ucol.mx',
                 )
             }
         }
