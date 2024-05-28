@@ -21,6 +21,12 @@ class Gastro extends AbstractEntity{
     #[Column('name')]
     public string $name;
 
+    #[Column('author')]
+    public int $author;
+
+    #[Column('logo', 'getLogoUri', 'setLogoFromUri')]
+    public ?File $logo = null;
+
     #[Column('description')]
     public string $description;
 
@@ -28,7 +34,7 @@ class Gastro extends AbstractEntity{
     public string $body;
 
     #[Column('delivery')]
-    public bool $delivery = true;
+    public int $delivery;
 
     #[Column('phone')]
     public ?string $phone;
@@ -56,6 +62,15 @@ class Gastro extends AbstractEntity{
         return $this->name;
     }
 
+    public function setAuthor(int $author): static{
+        $this->author = $author;
+        return $this;
+    }
+
+    public function getAuthor(): int{
+        return $this->author;
+    }
+
     public function setDesc(string $description): static{
         $this->description = $description;
         return $this;
@@ -74,12 +89,12 @@ class Gastro extends AbstractEntity{
         return $this->body;
     }
 
-    public function setDeli(bool $delivery): static{
+    public function setDeli(int $delivery): static{
         $this->delivery = $delivery;
         return $this;
     }
 
-    public function getDeli(): bool{
+    public function getDeli(): int{
         return $this->delivery;
     }
 
@@ -110,6 +125,19 @@ class Gastro extends AbstractEntity{
     {
         if (!empty($path)) {
             $this->menu = new File($path, false);
+        }
+        return $this;
+    }
+
+    public function getLogoUri(): ?string
+    {
+        return $this->logo?->getPathname();
+    }
+
+    public function setLogoFromUri(?string $path): static
+    {
+        if (!empty($path)) {
+            $this->logo = new File($path, false);
         }
         return $this;
     }

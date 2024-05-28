@@ -33,6 +33,9 @@ class UserManagement extends AbstractController
     #[Route(name: 'users', path: '/users', methods: 'GET')]
     public function list(Request $request): Response
     {
+        if(!($request->getSession()->get('role') == 1)) {
+            return $this->redirectToRoute('login');
+        }
         $page = $request->query->get('page', 1);
 
         $entities = $this->userModel->all(limit: 10, page: $page - 1);
@@ -46,6 +49,9 @@ class UserManagement extends AbstractController
     #[Route('/user/new', methods: [ 'GET', 'POST' ])]
     public function create(Request $request): Response
     {
+        if(!($request->getSession()->get('role') == 1)) {
+            return $this->redirectToRoute('login');
+        }
         $user = new User();
         $form = $this->createForm(UserForm::class, $user, ['new' => true]);
         $form->handleRequest($request);
@@ -65,6 +71,9 @@ class UserManagement extends AbstractController
     #[Route('/user/{id}/edit', methods: [ 'GET', 'POST' ])]
     public function edit(Request $request, int $id): Response
     {
+        if(!($request->getSession()->get('role') == 1)) {
+            return $this->redirectToRoute('login');
+        }
         $user = $this->ifEntity($id);
         $prevPass = $user->password;
         $currentPath = $user->getAvatarUri();
@@ -94,18 +103,23 @@ class UserManagement extends AbstractController
     #[Route('/user/{id}/delete', methods: 'GET')]
     public function delete(Request $request, int $id): Response
     {
-        $user = $this->ifEntity($id);
-        if ($request->query->has('confirmation')) {
-            $this->userModel->delete($user);
-            return $this->redirectToRoute('users');
+        if(!($request->getSession()->get('role') == 1)) {
+            return $this->redirectToRoute('login');
         }
-        return $this->render('user_delete.html.twig', ['user' => $user, 'rol' => $request->getSession()->get('rol')]);
+        $user = $this->ifEntity($id);
+        unlink($user->avatar);
+        $this->userModel->delete($user);
+        return $this->redirectToRoute('users');
     }
 
-    #[Route('/user/{id}', methods: 'GET')]
-    public function details(Request $request, int $id): Response
+    #[Route('/user/{id}/changerole/{rol}', methods: 'GET')]
+    public function changeRole(Request $r, int $id, int $rol): Response
     {
-        $entity = $this->ifEntity($id);
-        return $this->render('user.html.twig', ['user' => $entity, 'rol' => $request->getSession()->get('rol')]);
+        if(!($request->getSession()->get('role') == 1)) {
+            return $this->redirectToRoute('login');
+        }
+        $user = $this->ifEntity($id);
+        $this->userModel->changeRole($id, $rol);
+        return $this->redirectToRoute('users');
     }
 }

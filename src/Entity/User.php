@@ -36,7 +36,7 @@ class User extends AbstractEntity{
     public string $password;
 
     #[Column('role')]
-    public int $role;
+    public int $role = 3;
 
     #[Column('avatar', 'getAvatarUri', 'setAvatarFromUri')]
     public ?File $avatar = null;

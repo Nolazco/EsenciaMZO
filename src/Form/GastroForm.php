@@ -33,8 +33,8 @@ class GastroForm extends AbstractType{
             ->add('delivery', ChoiceType::class, [
                 'label' => '¿Entrega a domicilio?',
                 'choices' => [
-                    'Si' => "true",
-                    'No' => "false"
+                    'Si' => "1",
+                    'No' => "2"
                 ],
                 'required' => true
             ])
@@ -47,11 +47,21 @@ class GastroForm extends AbstractType{
                 'required' => true
             ])
             ->add('menu', FileType::class, [
+                'label' => 'Menu',
                 'required' => false,
                 'constraints' => [
                     new File(
                         maxSize: '10M',
                         extensions: ['pdf'],
+                    ),
+                ],
+            ])
+            ->add('logo', FileType::class, [
+                'required' => false,
+                'constraints' => [
+                    new File(
+                        maxSize: '2M',
+                        extensions: ['jpg', 'jpeg', 'png', 'gif'],
                     ),
                 ],
             ]);

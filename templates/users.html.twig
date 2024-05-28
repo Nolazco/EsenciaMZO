@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  {% set roles = ['Admin', 'Autor', 'Lector'] %}
+  <main class="responsive mb-small">
+    <h1 class="center-align">{{ 'users'|trans }}</h1>
+    {% if users %}
+      <table class="border striped responsive">
+        <thead>
+          <tr>
+            <th class="bold">Nombre</th>
+            <th class="bold">Apodo</th>
+            <th class="bold">Email</th>
+            <th class="bold">Rol</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for u in users %}
+            {% set rowClass = loop.index is even ? 'even' : 'odd' %}
+            <tr class="flex {{ rowClass }}">
+              <td>{{ u.getFullName() }}</td>
+              <td>{{ u.nickName }}</td>
+              <td>{{ u.email }}</td>
+              <td>{{ roles[u.role-1] }}</td>
+              <td>
+                <div class="button-group">
+                  <a href="#" data-ui="#show-{{u.id}}" class="button info circle"><i>visibility</i></a>
+                  <a href="/user/{{ u.id }}/edit" class="button warning circle"><i>edit</i></a>
+                  <a href="#" data-ui="#delete-{{u.id}}" class="button danger circle"><i>delete</i></a>
+                </div>
+              </td>
+            </tr>
+
+            <dialog class="modal" id="show-{{u.id}}">
+              <img class="circle large" src="{{ u.avatar }}">
+              <h5>{{ u.getFullName() }}</h5>
+              <div>¿Que desea hacer?</div>
+              {% if u.role == 1 %}
+                <a class="button" href="/user/{{u.id}}/changerole/{{2}}">Volver Autor</a>
+                <a class="button" href="/user/{{u.id}}/changerole/{{3}}">Volver Lector</a>
+              {% elseif u.role == 2 %}
+                <a class="button" href="/user/{{u.id}}/changerole/{{1}}">Volver Admin</a>
+                <a class="button" href="/user/{{u.id}}/changerole/{{3}}">Volver Lector</a>
+              {% elseif u.role == 3 %}
+                <a class="button" href="/user/{{u.id}}/changerole/{{1}}">Volver Admin</a>
+                <a class="button" href="/user/{{u.id}}/changerole/{{2}}">Volver Autor</a>
+              {% endif %}
+              <nav class="right-align no-space">
+                <button class="transparent link" data-ui="#show-{{u.id}}">Cancel</button>
+              </nav>
+            </dialog>
+
+            <dialog class="modal" id="delete-{{u.id}}">
+              <img class="circle large" src="{{ u.avatar }}">
+              <h5>¿Desea elimiar a {{u.name}}?</h5>
+              <div>Esta acción es permanente</div>
+              <nav class="right-align no-space">
+                <button class="transparent link" data-ui="#delete-{{u.id}}">Cancelar</button>
+                <a class="transparent link" href="/user/{{ u.id }}/delete">Confirmar</a>
+              </nav>
+            </dialog>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <article class="border medium no-padding middle-align center-align">
+        <div class="padding">
+          <h5>{{ 'table.empty'|trans }}<h5>
+        </div>
+      </article>
+    {% endif %}
+
+    <nav class="pagination">
+      {% if page > 1 %}
+        <a href="?page={{ page - 1}}" class="button transparent circle"><i>chevron_left</i></a>
+      {% else %}
+        <a disabled class="button transparent circle"><i>chevron_left</i></a>
+      {% endif %}
+      {{ page }}
+      <a href="?page={{ page + 1 }}" class="button transparent circle"><i>chevron_right</i></a>
+    </nav>
+  </main>
+{% endblock %}

@@ -14,14 +14,16 @@ create table if not exists users(
     avatar varchar(128) default null
 )engine=innodb;
 
-insert into users(name, last_name, email, bio, password, role) values('Admin', 'Mzo', 'admin@mzo.mx', 'Administrador de Esencia de Manzanillo', '$2y$10$PReuRWxDbK.IBfVhQ/kpIulMouvcR77fq.WX6w9BCOrOJTtXsy9uO', '1');
+insert into users(name, last_name, email, bio, password, role) values('Admin', 'Mzo', 'admin@mzo.mx', 'Administrador de Esencia de Manzanillo', '$2y$10$p3nW5zOhP/Dq/eSn4hubEOdXyot7MjawQd8bM2IINRIJFuBmOpsWO', '1');
 
 create table if not exists gastro(
     id int auto_increment primary key,
     name varchar(100) not null,
+    author int(1) not null,
+    logo varchar(128) default null,
     description text not null,
     body text not null,
-    delivery boolean not null default true,
+    delivery enum('1', '2') default '2' not null,
     phone varchar(15) default null,
     menu varchar(128) default null,
     location varchar(255) not null
@@ -30,6 +32,7 @@ create table if not exists gastro(
 create table if not exists turismo(
     id int auto_increment primary key,
     name varchar(100) not null,
+    author int(1) not null,
     description text not null,
     body text not null,
     location varchar(255) not null
@@ -38,6 +41,7 @@ create table if not exists turismo(
  create table if not exists eventos(
     id int auto_increment primary key,
     name varchar(100) not null,
+    author int(1) not null,
     description text not null,
     body text not null,
     location varchar(255) not null,
@@ -69,4 +73,11 @@ create table if not exists tags(
 create table if not exists tags_in_post(
     id_tag int not null,
     id_post int not null
+)engine=innodb;
+
+create table if not exists images(
+    id int auto_increment primary key,
+    route varchar(128) default null,
+    id_post int not null,
+    category enum('1', '2', '3') not null default '1'
 )engine=innodb;

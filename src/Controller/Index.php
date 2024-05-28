@@ -41,13 +41,14 @@ class Index extends AbstractController
                 'turismo' => $turismo,
                 'name' => $sess->get('name'),
                 'rol' => $sess->get('role'),
-                'loged' => true
+                'loged' => '1'
             ]);
         }else{
             return $this->render('visitor/home.html.twig', [
                 'gastro' => $gastro,
                 'turismo' => $turismo,
-                'loged' => false
+                'rol' => '0',
+                'loged' => '2'
             ]);
         }
     }
@@ -64,17 +65,21 @@ class Index extends AbstractController
                 $user->avatar = $avatar;
             }
             $user->setPasswordHash($user->password);
-            $this->userModel->save($user);
+            //dd($user);
 
-            return $this->redirectToRoute('login');
-
+            if($this->userModel->save($user)){
+                return $this->redirectToRoute('login');
+            }else{
+                echo "error?";
+            }
         }
 
         return $this->render('user_edit.html.twig', [
             'user' => $user,
             'form' => $form,
             'new' => true,
-            'rol' => $r->getSession()->get('role')
+            'rol' => $r->getSession()->get('role'),
+            'notShow' => true
         ]);
     }
 
@@ -120,7 +125,7 @@ class Index extends AbstractController
 
         return $this->render('login.html.twig', [
             'form' => $form,
-            'login' => true
+            'notShow' => true
         ]);
     }
 
@@ -131,8 +136,13 @@ class Index extends AbstractController
     }
 
     #[Route(name: 'dashboard', path: '/dashboard', methods: 'GET')]
-    public function dashboard(): Response{
-        return $this->render('dashboard.html.twig');
+    public function dashboard(Request $r): Response{
+        if(!(($r->getSession()->get('role') == 1) || ($r->getSession()->get('role') == 2))) {
+            return $this->redirectToRoute('login');
+        }
+        return $this->render('dashboard.html.twig', [
+            'role' => $r->getSession()->get('role')
+        ]);
     }
 
 }

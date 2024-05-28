@@ -1,18 +1,31 @@
 {% extends 'base.html.twig' %}
 {% block js %}
-  <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2Un0K2IL2UONMo6BEnWAgLq7Nw9uOxWo&callback=console.debug&libraries=maps,marker&v=beta"></script>
-  {% endblock %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+  
+{% endblock %}
 {% block css %}
   <style>
-    gmp-map {
-      height: 100%;
+    #pdf-viewer {
+        width: 80%;
+        height: 80%;
+        border: 2px solid #000;
+    }
+    canvas {
+        width: 100%;
+        height: auto;
+    }
+    #controls {
+        margin-bottom: 10px;
+    }
+    button {
+        margin-right: 5px;
     }
   </style>
 {% endblock %}
 {% block body %}
   <main class="responsive">
     <div class="grid justify-center align-center">
-      <div class="s12 flex justify-center align-center text-center my-mid2">
+      <div class="s6 flex justify-center align-center text-center my-mid2">
         <h2>{{ gastro.name }}</h2>
         <div class="row">
           <b>Descripción:</b>
@@ -36,15 +49,94 @@
         <div class="medium-divider"></div>
         <div class="row">
           <b>Ubicación:</b>
-          <div class="max">
-          <gmp-map center="40.12150192260742,-100.45039367675781" zoom="14" map-id="DEMO_MAP_ID">
-                <gmp-advanced-marker position="40.12150192260742,-100.45039367675781" title="My location"></gmp-advanced-marker>
-              </gmp-map>
-          </div>
+          <div class="max">{{ gastro.location }}</div>
         </div>
         <div class="medium-divider"></div>
+
         <a class="button app-back fill">Volver</a>
+      </div>
+      <div class="s6 flex justify-center align-center text-center my-mid2">
+        <div id="controls">
+          <button id="prev-page">Anterior</button>
+          <span>Page: <span id="page-num"></span> / <span id="page-count"></span></span>
+          <button id="next-page">Siguiente</button>
+        </div>
+        <div id="pdf-viewer"></div>
       </div>
     </div>
   </main>
+  <script>
+    var url = '/{{ gastro.menu }}';  // Reemplaza con la URL de tu PDF
+
+    var pdfjsLib = window['pdfjs-dist/build/pdf'];
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js';
+
+    var pdfDoc = null,
+        pageNum = 1,
+        pageRendering = false,
+        pageNumPending = null,
+        scale = 1,
+        canvas = document.createElement('canvas'),
+        ctx = canvas.getContext('2d');
+
+    document.getElementById('pdf-viewer').appendChild(canvas);
+
+    function renderPage(num) {
+        pageRendering = true;
+        pdfDoc.getPage(num).then(function(page) {
+            var viewport = page.getViewport({ scale: scale });
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+
+            var renderContext = {
+                canvasContext: ctx,
+                viewport: viewport
+            };
+            var renderTask = page.render(renderContext);
+
+            renderTask.promise.then(function() {
+                pageRendering = false;
+                if (pageNumPending !== null) {
+                    renderPage(pageNumPending);
+                    pageNumPending = null;
+                }
+            });
+        });
+
+        document.getElementById('page-num').textContent = num;
+    }
+
+    function queueRenderPage(num) {
+        if (pageRendering) {
+            pageNumPending = num;
+        } else {
+            renderPage(num);
+        }
+    }
+
+    function onPrevPage() {
+        if (pageNum <= 1) {
+            return;
+        }
+        pageNum--;
+        queueRenderPage(pageNum);
+    }
+
+    function onNextPage() {
+        if (pageNum >= pdfDoc.numPages) {
+            return;
+        }
+        pageNum++;
+        queueRenderPage(pageNum);
+    }
+
+    document.getElementById('prev-page').addEventListener('click', onPrevPage);
+    document.getElementById('next-page').addEventListener('click', onNextPage);
+
+    pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
+        pdfDoc = pdfDoc_;
+        document.getElementById('page-count').textContent = pdfDoc.numPages;
+        renderPage(pageNum);
+    });
+  </script>
 {% endblock %}

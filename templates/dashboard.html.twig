@@ -1,18 +1,20 @@
 {% extends 'base.html.twig' %}
 {% block body %}
 <main class="responsive">
-  <article class="no-padding card center">
-    <img class="responsive medium" src="https://previews.123rf.com/images/normaals/normaals2003/normaals200300029/141856997-joy-concept-flat-tiny-person-vector-illustration-happy-people-jumping-and-waving-with-hands-joyful.jpg">
-    <div class="absolute bottom left right padding bottom-shadow white-text">
-      <nav>
-        <h5>Usuarios</h5>
-        <div class="max"></div>
-        <a href="/users" class="circle transparent">
-          <i>arrow_forward</i>
-        </a>
-      </nav>
-    </div>
-  </article>
+  {% if role == 1 %}
+    <article class="no-padding card center">
+      <img class="responsive medium" src="https://previews.123rf.com/images/normaals/normaals2003/normaals200300029/141856997-joy-concept-flat-tiny-person-vector-illustration-happy-people-jumping-and-waving-with-hands-joyful.jpg">
+      <div class="absolute bottom left right padding bottom-shadow white-text">
+        <nav>
+          <h5>Usuarios</h5>
+          <div class="max"></div>
+          <a href="/users" class="circle transparent">
+            <i>arrow_forward</i>
+          </a>
+        </nav>
+      </div>
+    </article>
+  {% endif %}
   <article class="no-padding card center">
     <img class="responsive medium" src="https://st3.depositphotos.com/12889260/34452/v/1600/depositphotos_344527910-stock-illustration-eastern-bazaar-street-market-flat.jpg">
     <div class="absolute bottom left right padding bottom-shadow white-text">

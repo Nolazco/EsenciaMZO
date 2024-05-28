@@ -14,10 +14,15 @@
   <body class="light">
     <header>
       <nav>
-        <button class="circle transparent">
-          <i>arrow_back</i>
-        </button>
-        <h5 class="max">Escencia de Manzanillo</h5>
+        {% if notShow is not defined %}
+          <a class="circle transparent" href="/dashboard">
+            <i>dashboard</i>
+          </a>
+          <a class="circle transparent" href="/">
+            <i>home</i>
+          </a>
+        {% endif %}
+        <h5 class="max">Esencia de Manzanillo</h5>
       </nav>
     </header>
     {% block body %}{% endblock %}

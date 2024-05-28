@@ -1,60 +1,362 @@
 {% extends 'visitor/base_visitor.html.twig' %}
+{% block css %}
+  <link rel="stylesheet" type="text/css" href="/assets/style.css"/>
+{% endblock %}
 {% block body %}
-<main class="container">
-  <div class="blur" style="background: url('https://programadestinosmexico.com/wp-content/uploads/2023/09/MANZANILLO-5.jpg'); background-size: cover; color: #821264; font-weight: bold;">
-    <div class="blur">
-      <h5>Esencia de Manzanillo</h5>
-      <p>El lugar donde encontraras lo más emocinante de este puerto</p>
-    </div>
-    <nav class="right">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d120649.74663885737!2d-104.41908161928305!3d19.094289482947413!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8424d43417bb3e19%3A0xddb3e9aae7750d4b!2sManzanillo%2C%20Col.!5e0!3m2!1ses!2smx!4v1714370146091!5m2!1ses!2smx" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </nav>
-  </div>
-  <div class="small-divider"></div>
-  <div>Gastronomia</div>
-  <div class="small-divider"></div>
-  <div class="center">
-    {% if gastro %}
-      <div class="row">
-          {% for g in gastro %}
-            <div class="col">
-              <div class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">{{g.name}}</h5>
-                  <p class="card-text">{{g.desc}}</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
+  <!-------Banner Start------->
+    <section class="banner" data-scroll-index='0'>
+      <div class="banner-overlay">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 col-sm-12">
+              <div class="banner-text">
+                <h2 class="white">Welcome to your next adventure!</h2>
+                <h5 class="banner-text white">Explore unique destinations and discover the world's most fascinating corners with our tourism guide. From paradisiacal beaches to vibrant cities, we offer you a window into unforgettable experiences, authentic culture, and breathtaking landscapes. Plan your ideal trip with us and turn your dreams into unforgettable memories. Ready to discover the world? Start your journey today!</h5>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-12"> <img src="images/pezvela.png" class="img-fluid wow fadeInUp"/> </div>
+          </div>
+        </div>
+      </div>
+      <span class="svg-wave"> <img class="svg-wave" src="images/wave.svg"> </span> </section>
+
+      <!-------Banner End-------> 
+
+      <!-------About End------->
+
+      <section class="about section-padding prelative" data-scroll-index='1'>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="sectioner-header text-center">
+                <h3>About</h3>
+                <span class="line"></span>
+                <p>Welcome to Manzanillo's Essence, your ultimate guide to discovering the hidden gems and vibrant activities that make Manzanillo, Colima, a must-visit destination. Whether you're seeking relaxation, exploration, or a taste of authentic Mexican culture, Manzanillo's Essence is here to guide you every step of the way. Join us in discovering the essence of Manzanillo and embark on a journey that will leave you enchanted and inspired.</p>
+              </div>
+              <div class="section-content text-center">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="icon-box wow fadeInUp" data-wow-delay="0.2s"> <i class="fa fa-life-ring" aria-hidden="true"></i>
+                      <h5>Support</h5>
+                      <p>Find everything you need to know about the varied activities you can do and places you can visit.</p>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="icon-box wow fadeInUp" data-wow-delay="0.4s"> <i class="fa fa-mobile" aria-hidden="true"></i>
+                      <h5>Cross Platform</h5>
+                      <p>Completely accesible both on computers and phones, so you can check it on-the-go.</p>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="icon-box wow fadeInUp" data-wow-delay="0.6s"> <i class="fa fa-bolt" aria-hidden="true"></i>
+                      <h5>Fast</h5>
+                      <p>Optimal use of resources so you can check destinations fast and comfortably.</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          {% endfor %}
-      </div>
-    {% else %}
-      No hay nada xd
-    {% endif %}
-  </div>
-  <div class="small-divider"></div>
-  <div>Turismo</div>
-  <div class="small-divider"></div>
-  <div class="grid center">
-  {% if turismo %}
-    {% for t in turismo %}
-      <div class="s12 m6 l3">
-        <article class="no-padding border round">
-          <img class="responsive small top-round" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnS1NrYqeF7LQhCJFQQnCIjbOkiX0DrQYhL5XCMvHLEg&s">
-          <div class="padding">
-            <h5>{{t.name}}</h5>
-            <p>{{t.desc}}</p>
-            <nav>
-              <button>Ver más</button>
-            </nav>
           </div>
-        </article>
-      </div>
-    {% endfor %}
-  {% else %}
-    No hay nada xd
-  {% endif %}
-  </div>
-</main>
+        </section>
+        <!-------About End-------> 
+
+        <!-------Video Start------->
+        <section class="video-section prelative text-center white">
+          <div class="section-padding video-overlay">
+            <div class="container">
+              <h3>Watch Now</h3>
+              <i class="fa fa-play" id="video-icon" aria-hidden="true"></i>
+              <div class="video-popup">
+                <div class="video-src">
+                  <div class="iframe-src">
+                    <iframe src="https://www.youtube.com/embed/uU4Tm4STOoo?rel=0&amp;showinfo=0" allowfullscreen></iframe>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-------Video End-------> 
+
+        <!-------Cultural section------->
+        <section class="sections section-padding" data-scroll-index='2'>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="sectioner-header text-center">
+                  <h3>Curtural Activities</h3>
+                  <span class="line"></span>
+                  <p>Immerse yourself in a rich array of cultural activities; Connect with authentic traditions and artistic expressions that will leave you in awe. Ready to enrich your spirit? Start your cultural journey today!</p>
+                </div>
+                <div class="section-content text-center">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="sections-detail wow bounce" data-wow-delay="0.2s"> <img src="images/wski.jpg" class="img-fluid"/>
+                        <h4>Water Ski</h4>
+                        <p>Explore the coast and sea!</p>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="sections-detail wow bounce" data-wow-delay="0.4s"> <img src="images/scubad.jpg" class="img-fluid"/>
+                        <h4>Scuba Diving</h4>
+                        <p>Explore the ocean yourself and see all the precious water life!</p>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="sections-detail wow bounce" data-wow-delay="0.6s"> <img src="images/bananA.jpg" class="img-fluid"/>
+                        <h4>Banana</h4>
+                        <p>Get yourself and other an exciting ride on the "banana"!!</p>
+                      </div>
+                    </div>
+                  </div>
+                <a href="#" class="about-btn">See More</a> </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+        <!-------Team End-------> 
+
+        <!-------Guided Tours Start------->
+        <section class="testimonial section-padding">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="sectioner-header text-center">
+                  <h3 style="color: white;">Guided Tours</h3>
+                  <span class="line"></span>
+                  <p style="color: white;">Embark on a journey of discovery with our guided tours at Manzanillo's Essence. Our experienced and knowledgeable tour guides are here to lead you on unforgettable adventures through the hidden gems and iconic landmarks of Manzanillo, Colima.</p>
+                </div>
+                <div class="section-content text-center">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="sections-detail wow bounce" data-wow-delay="0.2s"> <img src="images/gts1.jpg" class="img-fluid"/>
+                        <h4>Cascada El Salto</h4>
+                        <p style="color: white;">Guided tour to Cascade El Salto in Manzanillo. Nestled amidst lush greenery and pristine landscapes, Cascade El Salto offers a breathtaking retreat from the hustle and bustle of city life.</p>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="sections-detail wow bounce" data-wow-delay="0.4s"> <img src="images/gts2.jpg" class="img-fluid"/>
+                        <h4>Private tour: From airport to Playa De Oro</h4>
+                        <p style="color: white;">enjoy the convenience of door-to-door transportation in a comfortable and air-conditioned vehicle; Skip the hassle of navigating transportation logistics and let us take care of everything for you.</p>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="sections-detail wow bounce" data-wow-delay="0.6s"> <img src="images/gts3.jpg" class="img-fluid"/>
+                        <h4>Guided Tour through mountains and beaches in quad bike</h4>
+                        <p style="color: white;">A thrilling journey through some of Manzanillo's most scenic and untouched landscapes. Feel the wind in your hair as you zip through lush mountain trails, taking in panoramic views of the surrounding countryside.</p>
+                      </div>
+                    </div>
+                  </div>
+                <a href="#" class="about-btn">See More</a> </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-------Tours End-------> 
+
+        <!-------Restaurant Reviews section------->
+        <section class="sections section-padding">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="sectioner-header text-center">
+                  <h3>Restaurant Reviews</h3>
+                  <span class="line"></span>
+                  <p>Indulge your taste buds with our comprehensive restaurant reviews section at Manzanillo's Essence. Discover the culinary delights awaiting you in Manzanillo, Colima, as we explore the city's diverse dining scene.</p>
+                </div>
+                <div class="section-content text-center">
+                  <div class="row">
+                  {% for g in gastro %}
+                    <div class="col-md-4">
+                      <div class="sections-detail wow bounce" data-wow-delay="0.2s"> <img src="{{g.logo}}" class="img-fluid"/>
+                        <h4>{{g.name}}</h4>
+                        <p>{{g.desc}}</p>
+                        <a href="/gastronomia/{{g.id}}" class="about-btn">See More</a>
+                      </div>
+                    </div>
+                  {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+        <!-------Team End-------> 
+
+        <!-------Testimonial Start------->
+        <section class="testimonial section-padding" data-scroll-index='3'>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="sectioner-header text-center white">
+                  <h3>Testimonials</h3>
+                  <span class="line"></span>
+                  <p class="white">Join our satisfied customers and experience a journey like no other! Ready to create your own memories? Start today!</p>
+                </div>
+
+                <div class="section-content">
+                  <div class="row">
+                    <div class="offset-md-2 col-md-8 col-sm-12">
+                      <div class="slider">
+                        <div class="slider-item">
+                          <div class="test-img"><img src="images/user1.jpg" alt="Placeholder" width="157" height="157"></div>
+                          <div class="test-text"><span class="title"><span>John Michal</span> Digital Designer</span>"My trip was simply spectacular, because all the destinations I visited exceeded all my expectations. I will definitely travel with the aid of this site again!"</div>
+                        </div>
+                        <div class="slider-item">
+                          <div class="test-img"><img src="images/user3.jpg" alt="Placeholder" width="157" height="157"></div>
+                          <div class="test-text"><span class="title"><span>Steve Smith</span> App User</span>"A culturally enriching experience that I will remember for a lifetime thanks for the advice in here. The activities and excursions were much more than I expected, and I learned so much about local traditions. A 10 out of 10!"</div>
+                        </div>
+                        <div class="slider-item">
+                          <div class="test-img"><img src="images/user2.jpg" alt="Placeholder" width="157" height="157"></div>
+                          <div class="test-text"><span class="title"><span>Gordon Shaw</span> Blogger</span>"Thanks to this guide, I discovered places I would never have found on my own, and the tours I visited were both educational and entertaining. Highly recommended!"</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-------Testimonial End-------> 
+
+        <!-------FAQ Start------->
+        <section class="faq section-padding prelative" data-scroll-index='4'>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="sectioner-header text-center">
+                  <h3>Frequently Asked Questions (FAQ)</h3>
+                  <span class="line"></span>
+                  <p>Got questions? We've got answers! Check out our FAQ section for all the information you need to plan your perfect trip to Manzanillo, Colima. From the best time to visit to transportation options and more, we've got you covered. Can't find what you're looking for? Feel free to reach out to us directly, and we'll be happy to assist you.</p>
+                </div>
+                <div class="section-content">
+                  <div class="row">
+                    <div class="col-md-6 faq-content wow fadeInUp" data-wow-delay="0.2s">
+                      <h4>What is the best time to visit Manzanillo, Colima?</h4>
+                      <p>The best time to visit Manzanillo is during the dry season, from November to April. During these months, the weather is more pleasant with moderate temperatures and less chance of rain.</p>
+                    </div>
+                    <div class="col-md-6 faq-content wow fadeInUp" data-wow-delay="0.2s">
+                      <h4>What are the must-do tourist activities in Manzanillo?</h4>
+                      <p>you can't miss: Enjoying the beautiful beaches like Playa La Audiencia and Playa Miramar, or engaging in water sports such as snorkeling, diving, and sport fishing, you also shouldn't miss visiting the historic downtown and the Manzanillo boardwalk!</p>
+                    </div>
+                    <div class="col-md-6 faq-content wow fadeInUp" data-wow-delay="0.4s">
+                      <h4>Is it safe to travel to Manzanillo?</h4>
+                      <p>Yes, Manzanillo is generally safe for tourists. As with any destination, it's advisable to take basic precautions such as not displaying valuables, staying in well-lit areas at night, and following local recommendations.</p>
+                    </div>
+                    <div class="col-md-6 faq-content wow fadeInUp" data-wow-delay="0.4s">
+                      <h4>What transportation options are available in Manzanillo?</h4>
+                      <p>Manzanillo offers several transportation options, including taxis, buses, and private transportation services like Uber. Renting a car is also possible for greater convenience and flexibility in your travels.</p>
+                    </div>
+                    <div class="col-md-6 faq-content wow fadeInUp" data-wow-delay="0.6s">
+                      <h4>What type of cuisine can I find in Manzanillo?</h4>
+                      <p>Manzanillo is famous for its seafood-based cuisine. Dishes you must try include ceviche, pescado zarandeado, shrimp tacos, and tuba, a traditional regional drink.</p>
+                    </div>
+                    <div class="col-md-6 faq-content wow fadeInUp" data-wow-delay="0.6s">
+                      <h4>What are the accommodation options in Manzanillo?</h4>
+                      <p>Manzanillo offers a wide variety of accommodation options, from luxury hotels and all-inclusive resorts to hostels and vacation rentals. There is something for every type of traveler and budget.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-------FAQ End-------> 
+
+        <!-------Event Start------->
+        <section class="eventSec section-padding" data-scroll-index='5'>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="sectioner-header text-center white">
+                  <h3>Events</h3>
+                  <span class="line"></span>
+                  <p class="white">From festivals showcasing traditional music and dance to art exhibitions, food fairs, and sporting events, there's always something happening in Manzanillo to entertain and inspire. Whether you're a local resident or a visitor, immerse yourself in the rich tapestry of culture and tradition that defines life in Manzanillo.</p>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="section-content text-center">
+                  <ul>
+                    <li><a href="#"><img src="images/oe.png" class="wow fadeInUp" data-wow-delay="0.4s"/></a></li>
+                    <li><a href="#"><img src="images/noe.png" class="wow fadeInUp" data-wow-delay="0.7s"/></a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-------Event End------->
+
+        <!-------Contact Start------->
+        <section class="contact section-padding" data-scroll-index='6'>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="sectioner-header text-center">
+                  <h3>Contact us</h3>
+                  <span class="line"></span>
+                  <p>Have a question or need assistance planning your trip to Manzanillo, Colima? Feel free to reach out to us using the contact information below:</p>
+                </div>
+                <div class="section-content">
+                  <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-8">
+                      <form id="contact_form" action="">
+                        <div class="row">
+                          <div class="col">
+                            <input type="text" id="your_name" class="form-input w-100" name="full-name" placeholder="Full Name" required>
+                          </div>
+                          <div class="col">
+                            <input type="email" id="email" class="form-input w-100" name="email" placeholder="Email" required>
+                          </div>
+                        </div>
+                        <input type="text" id="subject" class="form-input w-100" name="subject" placeholder="Subject">
+                        <textarea class="form-input w-100" id="message" placeholder="Message" name="message"></textarea>
+                        <button class="btn-grad w-100 text-uppercase" type="submit" name="button">submit</button>
+                      </form>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-4">
+                      <div class="contact-info white">
+                        <div class="contact-item media"> <i class="fa fa-map-marker-alt media-left media-right-margin"></i>
+                          <div class="media-body">
+                            <p class="text-uppercase">Address</p>
+                            <p class="text-uppercase">Manzanillo Tourism Office, 123 Oceanfront Avenue, Manzanillo, Colima, Mexico</p>
+                          </div>
+                        </div>
+                        <div class="contact-item media"> <i class="fa fa-mobile media-left media-right-margin"></i>
+                          <div class="media-body">
+                            <p class="text-uppercase">Phone</p>
+                            <p class="text-uppercase"><a class="text-white" href="tel:+15173977100">+52 (555) 123-4567</a> </p>
+                          </div>
+                        </div>
+                        <div class="contact-item media"> <i class="fa fa-envelope media-left media-right-margin"></i>
+                          <div class="media-body">
+                            <p class="text-uppercase">E-mail</p>
+                            <p class="text-uppercase"><a class="text-white" href="mailto:info@manzanillotourism.com">info@manzanillotourism.com</a> </p>
+                          </div>
+                        </div>
+                        <div class="contact-item media"> <i class="fa fa-clock media-left media-right-margin"></i>
+                          <div class="media-body">
+                            <p class="text-uppercase">Working Hours</p>
+                            <p class="text-uppercase">24/7</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-------Contact End------->
 {% endblock %}
