@@ -1,0 +1,67 @@
+{% extends 'visitor/base_visitor.html.twig' %}
+{% if official == true %}
+  {%set txt = {'title': 'Official events', 'text': 'Cultural events organized and disseminated by the government of Manzanillo', 'photo': 'https://manzanillo.gob.mx/assets/img/escudo_manzanillo.png'}%}
+{% elseif official == false %}
+  {%set txt = {'title': 'Unfficial events', 'text': 'Events organized by the citizens of Manzanillo', 'photo': 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Montaje_de_Manzanillo.jpg/1200px-Montaje_de_Manzanillo.jpg'}%}
+{% endif %}
+{% block title %}{{ official == true ? 'Official' : 'Unofficial'}} events{% endblock %}
+{% block css %}
+  <link rel="stylesheet" type="text/css" href="/assets/gastroListStyle.css"/>
+{% endblock %}
+{% block body %}
+  <!-------Banner Start------->
+    <section class="banner" data-scroll-index='0'>
+      <div class="banner-overlay">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 col-sm-12">
+              <div class="banner-text">
+                <h2 class="white">{{txt['title']}}</h2>
+                <h5 class="banner-text white">{{txt['text']}}</h5>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-12"> <img style="border-radius: 50%;" src="{{txt['photo']}}" class="img-fluid wow fadeInUp"/> </div>
+          </div>
+        </div>
+      </div>
+      <span class="svg-wave"> <img class="svg-wave" src="/images/wave.svg"> </span> 
+    </section>
+
+        <!-------FAQ Start------->
+        <section class="faq section-padding prelative" data-scroll-index='4'>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="sectioner-header text-center">
+                  <h3>Recently added</h3>
+                  <span class="line"></span>
+                </div>
+                <div class="section-content text-center">
+                  <div class="row">
+                  {% for e in events %}
+                    <div class="col-md-4 faq-content wow fadeInUp" data-wow-delay="0.2s">
+                      <div class="card" style="width: 18rem;">
+                        <div class="row">
+                          <div class="col-md-4">
+                            <img class="card-img-top" style="width: 10pc;" src="/{{e.main ? e.main : 'restaurant.svg'}}" alt="Card image cap">
+                          </div>
+                        <div class="col-md-8">
+                          <div class="card-body">
+                            <h5 class="card-title">{{e.name}}</h5>
+                            <p class="card-text">{{e.desc}}</p>
+                            <p class="card-text">{{e.date}}</p>
+                            <a href="/events/{{e.id}}" style="text-decoration: none;" class="btn-grad text-uppercase">See more</a>
+                          </div>
+                        </div>
+                        </div>
+                      </div>
+                    </div>
+                  {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+{% endblock %}

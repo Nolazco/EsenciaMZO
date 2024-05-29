@@ -16,7 +16,7 @@ class Eventos extends AbstractEntity{
     use ColumnHydrate;
 
     #[Column('id')]
-    public int $id;
+    public ?int $id;
 
     #[Column('name')]
     public string $name;
@@ -34,7 +34,7 @@ class Eventos extends AbstractEntity{
     public string $location;
 
     #[Column('category')]
-    public int $cat;
+    public int $category;
 
     #[Column('date')]
     public string $date;
@@ -42,11 +42,11 @@ class Eventos extends AbstractEntity{
     #[Column('dateOfEvent')]
     public string $doe;
 
-    #[Column('mainPicture', 'getPictureUri', 'setPictureUri')]
-    public ?File $main;
+    #[Column('mainPicture', 'getMainUri', 'setMainFromUri')]
+    public ?File $main = null;
 
-    #[Column('attach', 'getAttachUri', 'setAttachUri')]
-    public ?File $attach;
+    #[Column('attach', 'getAttachUri', 'setAttachFromUri')]
+    public ?File $attach = null;
 
     public function setId(int $id): static {
         $this->id = $id;
@@ -57,6 +57,7 @@ class Eventos extends AbstractEntity{
 
     public function setName(string $name): static {
         $this->name = $name;
+        return $this;
     }
     public function getName(): string {
         return $this->name;
@@ -73,6 +74,7 @@ class Eventos extends AbstractEntity{
 
     public function setDesc(string $desc): static {
         $this->desc = $desc;
+        return $this;
     }
     public function getDesc(): string {
         return $this->desc;
@@ -96,13 +98,13 @@ class Eventos extends AbstractEntity{
         return $this->location;
     }
 
-    public function setCategoty(int $cat): static{
-        $this->cat = $cat;
+    public function setCategoty(int $category): static{
+        $this->category = $category;
         return $this;
     }
 
     public function getCategory(): int{
-        return $this->cat;
+        return $this->category;
     }
 
     public function setDate(string $date): static{
@@ -136,12 +138,12 @@ class Eventos extends AbstractEntity{
         return $this;
     }
 
-    public function getPictureUri(): ?string
+    public function getMainUri(): ?string
     {
         return $this->main?->getPathname();
     }
 
-    public function setPictureFromUri(?string $path): static
+    public function setMainFromUri(?string $path): static
     {
         if (!empty($path)) {
             $this->main = new File($path, false);

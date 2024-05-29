@@ -27,5 +27,23 @@ class EventosRepo extends AbstractModel{
         //dd($data);
         return $data ?? null;
     }
+
+    public function getOfficial(): ?array{
+        $data = $this->queryBind(
+            "SELECT * FROM {$this->getTable()} WHERE category = 1 ORDER BY id DESC"
+        );
+
+        //dd($data);
+        return $data ?? null;
+    }
+
+    public function getUnofficial(): ?array{
+        $data = $this->queryBind(
+            "SELECT * FROM {$this->getTable()} WHERE category = 2 ORDER BY id DESC"
+        );
+
+        //dd($data);
+        return $data ?? null;
+    }
 }
 ?>

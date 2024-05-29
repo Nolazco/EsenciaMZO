@@ -103,13 +103,39 @@ class EventosManagement extends AbstractController
         ]);
     }
 
-    #[Route(path: '/dashboard/events/{id}/delete', methos: 'GET')]
+    #[Route(path: '/dashboard/events/{id}/delete', methods: 'GET')]
     public function delete(Request $r, int $id): Response{
         $entity = $this->ifEntity($id);
         unlink($entity->attach);
         unlink($entity->main);
         $this->eventsModel->delete($entity);
         return $this->redirect('/dashboard/events');
+    }
+
+    #[Route(path: '/events/official', methods: 'GET')]
+    public function eventsOfficial(Request $r): Response{
+        $entities = $this->eventsModel->getOfficial();
+
+        return $this->render('/visitor/events.html.twig', [
+            'events' => $entities,
+            'rol' => $r->getSession()->has('login') ? $r->getSession()->get('role') : 0,
+            'name' => $r->getSession()->has('login') ? $r->getSession()->get('name') : 0,
+            'loged' => $r->getSession()->has('login') ? true : false,
+            'official' => true
+        ]);
+    }
+
+    #[Route(path: '/events/unofficial', methods: 'GET')]
+    public function eventsUnofficial(Request $r): Response{
+        $entities = $this->eventsModel->getUnofficial();
+
+        return $this->render('/visitor/events.html.twig', [
+            'events' => $entities,
+            'rol' => $r->getSession()->has('login') ? $r->getSession()->get('role') : 0,
+            'name' => $r->getSession()->has('login') ? $r->getSession()->get('name') : 0,
+            'loged' => $r->getSession()->has('login') ? true : false,
+            'official' => false
+        ]);
     }
 
     #[Route(path: '/events/{id}', methods: 'GET')]
@@ -120,18 +146,6 @@ class EventosManagement extends AbstractController
         return $this->render('visitor/event_see.html.twig', [
             'event' => $entity,
             'author' => $author,
-            'rol' => $r->getSession()->has('login') ? $r->getSession()->get('role') : 0,
-            'name' => $r->getSession()->has('login') ? $r->getSession()->get('name') : 0,
-            'loged' => $r->getSession()->has('login') ? true : false
-        ]);
-    }
-
-    #[Route(path: '/events/official', methods: 'GET')]
-    public function eventsOfficial(Request $r): Response{
-        $entities = $this->eventsModel->getDesc();
-
-        return $this->render('/visitor/events.html.twig', [
-            'events' => $entities,
             'rol' => $r->getSession()->has('login') ? $r->getSession()->get('role') : 0,
             'name' => $r->getSession()->has('login') ? $r->getSession()->get('name') : 0,
             'loged' => $r->getSession()->has('login') ? true : false

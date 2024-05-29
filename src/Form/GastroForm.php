@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraints\File;
 
 class GastroForm extends AbstractType{
 
-    public function buildForm(FormBuilderInterface $builder): void{
+    public function buildForm(FormBuilderInterface $builder, array $options): void{
         $builder
             ->add('submit', SubmitType::class)
             ->add('name', TextType::class, [

@@ -20,3 +20,5 @@ var/cache/dev
 public/logos
 public/menus
 public/tour_main_photos
+public/events_attachments
+public/events_main_photos

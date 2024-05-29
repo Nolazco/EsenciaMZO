@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints\File;
 
 class EventForm extends AbstractType{
     
-    public function buildForm(FormBuilderInterface $builder): void{
+    public function buildForm(FormBuilderInterface $builder, array $options): void{
         $builder
             ->add('submit', SubmitType::class)
             ->add('name', TextType::class, [
@@ -42,7 +42,8 @@ class EventForm extends AbstractType{
                 'required' => true
             ])
             ->add('doe', DateType::class, [
-                'widget' => 'choice',
+                'widget' => 'single_text',
+                'input' => 'string',
                 'required' => true
             ])
             ->add('attach', FileType::class, [
