@@ -48,7 +48,10 @@ create table if not exists turismo(
     description text not null,
     body text not null,
     location varchar(255) not null,
-    attach varchar(255) not null
+    attach varchar(255) not null,
+    category int(1) default 1,
+    date varchar(20) not null,
+    dateOfEvent varchar(20) not null
 )engine=innodb;
 
 create table if not exists blogs(

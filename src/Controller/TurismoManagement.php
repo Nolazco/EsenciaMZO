@@ -95,8 +95,8 @@ class TurismoManagement extends AbstractController{
 
         return $this->render('tour_edit.html.twig', [
             'tour' => $entity,
-            'form' => $form]
-        );
+            'form' => $form
+        ]);
     }
 
     #[Route('/dashboard/turismo/{id}/delete', methods: 'GET')]

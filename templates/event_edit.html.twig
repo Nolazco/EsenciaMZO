@@ -1,0 +1,8 @@
+{% extends 'base.html.twig'  %}
+
+{% block body %}
+<main class="responsive">
+  <h1 class="center-align">{{ event.id is null ? 'Nuevo' : 'Editar'}}</h1>
+  {% include 'form/event.html.twig' %}
+</main>
+{% endblock %}

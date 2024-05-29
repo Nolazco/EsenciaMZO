@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <main class="responsive mb-small">
+    <h1 class="center-align">Eventos</h1>
+    {% if events %}
+      <table class="border striped responsive">
+        <thead>
+          <tr>
+            <th class="bold">Nombre</th>
+            <th class="bold">Descripción</th>
+            <th class="bold">Categoría</th>
+            <th class="bold">Ubicación</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for e in events %}
+            {% set rowClass = loop.index is even ? 'even' : 'odd' %}
+            <tr class="flex {{ rowClass }}">
+              <td>{{ e.name }}</td>
+              <td>{{ e.desc }}</td>
+              <td>{{ e.cat == 1 ? 'Oficial' : 'No oficial' }}</td>
+              <td>{{ e.location }}</td>
+              <td>
+                <div class="button-group">
+                  <a href="/dashboard/events/details/{{ e.id }}" class="button info circle medium"><i>visibility</i></a>
+                  <a href="/dashboard/events/{{ e.id }}/edit" class="button warning circle medium"><i>edit</i></a>
+                  <a href="#" data-ui="#delete-{{e.id}}" class="button danger circle medium"><i>delete</i></a>
+                </div>
+              </td>
+            </tr>
+
+            <dialog class="modal" id="delete-{{e.id}}">
+              <h5>¿Desea elimiar a {{e.name}}?</h5>
+              <div>Esta acción es permanente</div>
+              <nav class="right-align no-space">
+                <button class="transparent link" data-ui="#delete-{{e.id}}">Cancelar</button>
+                <a class="transparent link" href="/dashboard/events/{{ e.id }}/delete">Confirmar</a>
+              </nav>
+            </dialog>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <article class="border medium no-padding middle-align center-align">
+        <div class="padding">
+          <h5>{{ 'table.empty'|trans }}<h5>
+        </div>
+      </article>
+    {% endif %}
+
+    <nav class="pagination">
+      {% if page > 1 %}
+        <a href="?page={{ page - 1}}" class="button transparent circle"><i>chevron_left</i></a>
+      {% else %}
+        <a disabled class="button transparent circle"><i>chevron_left</i></a>
+      {% endif %}
+      {{ page }}
+      <a href="?page={{ page + 1 }}" class="button transparent circle"><i>chevron_right</i></a>
+      <div class="my-mid">
+        <a class="button success" href="/dashboard/events/new">
+          <i>add</i>
+          <span>Agregar</span>
+        </a>
+      </div>
+    </nav>
+  </main>
+{% endblock %}

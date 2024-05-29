@@ -21,17 +21,38 @@ class Eventos extends AbstractEntity{
     #[Column('name')]
     public string $name;
 
+    #[Column('author')]
+    public int $author;
+
     #[Column('description')]
     public string $desc;
 
+    #[Column('body')]
+    public string $body;
+
+    #[Column('location')]
+    public string $location;
+
+    #[Column('category')]
+    public int $cat;
+
+    #[Column('date')]
+    public string $date;
+
+    #[Column('dateOfEvent')]
+    public string $doe;
+
+    #[Column('mainPicture', 'getPictureUri', 'setPictureUri')]
+    public ?File $main;
+
     #[Column('attach', 'getAttachUri', 'setAttachUri')]
-    public ?File $attach = null;
+    public ?File $attach;
 
     public function setId(int $id): static {
         $this->id = $id;
     }
-    public function getId(): int {
-        return $this->id;
+    public function getId(): ?int {
+        return $this->id ?? null;
     }
 
     public function setName(string $name): static {
@@ -41,11 +62,65 @@ class Eventos extends AbstractEntity{
         return $this->name;
     }
 
+    public function setAuthor(int $author): static{
+        $this->author = $author;
+        return $this;
+    }
+
+    public function getAuthor(): int{
+        return $this->author;
+    }
+
     public function setDesc(string $desc): static {
         $this->desc = $desc;
     }
     public function getDesc(): string {
         return $this->desc;
+    }
+
+    public function setBody(string $body): static{
+        $this->body = $body;
+        return $this;
+    }
+
+    public function getBody(): string{
+        return $this->body;
+    }
+
+    public function setLocation(string $location): static{
+        $this->location = $location;
+        return $this;
+    }
+
+    public function getLocation(): string{
+        return $this->location;
+    }
+
+    public function setCategoty(int $cat): static{
+        $this->cat = $cat;
+        return $this;
+    }
+
+    public function getCategory(): int{
+        return $this->cat;
+    }
+
+    public function setDate(string $date): static{
+        $this->date = $date;
+        return $this;
+    }
+
+    public function getDate(): string{
+        return $this->date;
+    }
+
+    public function setDOE(string $doe): static{
+        $this->doe = $doe;
+        return $this;
+    }
+
+    public function getDOE(): string{
+        return $this->doe;
     }
 
     public function getAttachUri(): ?string
@@ -57,6 +132,19 @@ class Eventos extends AbstractEntity{
     {
         if (!empty($path)) {
             $this->attach = new File($path, false);
+        }
+        return $this;
+    }
+
+    public function getPictureUri(): ?string
+    {
+        return $this->main?->getPathname();
+    }
+
+    public function setPictureFromUri(?string $path): static
+    {
+        if (!empty($path)) {
+            $this->main = new File($path, false);
         }
         return $this;
     }

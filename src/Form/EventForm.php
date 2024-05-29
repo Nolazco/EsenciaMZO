@@ -1,54 +1,53 @@
-<?php 
+<?php
 
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
 
-class GastroForm extends AbstractType{
-
+class EventForm extends AbstractType{
+    
     public function buildForm(FormBuilderInterface $builder): void{
         $builder
             ->add('submit', SubmitType::class)
             ->add('name', TextType::class, [
-                'label' => 'Nombre',
+                'label' => 'Nombre del evento',
                 'required' => true
             ])
             ->add('desc', TextType::class, [
-                'label' => 'Descripción corta',
+                'label' => 'Descripcion corta',
                 'required' => true
             ])
             ->add('body', TextareaType::class, [
                 'label' => 'Informacion',
                 'required' => true
             ])
-            ->add('delivery', ChoiceType::class, [
-                'label' => '¿Entrega a domicilio?',
-                'choices' => [
-                    'Si' => "1",
-                    'No' => "2"
-                ],
-                'required' => true
-            ])
-            ->add('phone', TelType::class, [
-                'label' => 'Telefono',
-                'required' => false
-            ])
             ->add('location', TextType::class, [
                 'label' => 'Direccion',
                 'required' => true
             ])
-            ->add('menu', FileType::class, [
-                'label' => 'Menu',
-                'required' => false,
+            ->add('category', ChoiceType::class, [
+                'label' => '¿Evento oficial?',
+                'choices' => [
+                    'Oficial' => "1",
+                    'No oficial' => "2"
+                ],
+                'required' => true
+            ])
+            ->add('doe', DateType::class, [
+                'widget' => 'choice',
+                'required' => true
+            ])
+            ->add('attach', FileType::class, [
+                'label' => 'Panfleto',
+                'required' => true,
                 'constraints' => [
                     new File(
                         maxSize: '10M',
@@ -56,8 +55,9 @@ class GastroForm extends AbstractType{
                     ),
                 ],
             ])
-            ->add('logo', FileType::class, [
-                'required' => false,
+            ->add('main', FileType::class, [
+                'label' => 'Presentación del evento',
+                'required' => true,
                 'constraints' => [
                     new File(
                         maxSize: '2M',
@@ -65,6 +65,5 @@ class GastroForm extends AbstractType{
                     ),
                 ],
             ]);
-
-    }
+    } 
 }
