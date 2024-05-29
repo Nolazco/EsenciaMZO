@@ -87,7 +87,48 @@
     {% endblock %}
   </head>
   <body class="light">
-  
+    <header>
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg">
+        <div class="container"> 
+          <a class="navbar-brand navbar-logo" href="/"> 
+            <img src="/images/logo.png" alt="logo" class="logo-1"> 
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> 
+            <span class="fas fa-bars"></span> 
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item"> <a class="nav-link" href="/">Home</a> </li>
+              <li class="nav-item"> <a class="nav-link" href="/gastronomy">Gastronomy</a> </li>
+              <li class="nav-item"> <a class="nav-link" href="/tourism">Tourism</a> </li>
+              <li class="nav-item"> <a class="nav-link" href="#">Events</a> </li>
+              <li class="nav-item dropdown">
+              {% if (loged == true and rol == '1') or (loged == true and rol == '2') %} 
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-scroll-nav="7.">¡Hi {{name}}!</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a style="color: black;" class="dropdown-item" href="/dashboard">Dashboard</a>
+                  <a style="color: black;" class="dropdown-item" href="/logout">Log Out</a>
+                </div>
+              {% elseif (loged and rol == '3') %}
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-scroll-nav="7.">¡Hi {{name}}!</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a style="color: black;" class="dropdown-item" href="/logout">Log Out</a>
+                </div>
+              {% else %}
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-scroll-nav="7.">¡Join us!</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a style="color: black;" class="dropdown-item" href="/register">Register</a>
+                  <a style="color: black;" class="dropdown-item" href="/login">Login</a>
+                </div>
+              {% endif %}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- End Navbar --> 
+    </header>
     {% block body %}{% endblock %}
     <footer class="footer-copy">
       <div class="container-fluid">
