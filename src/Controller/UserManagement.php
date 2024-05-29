@@ -115,7 +115,7 @@ class UserManagement extends AbstractController
     #[Route('/user/{id}/changerole/{rol}', methods: 'GET')]
     public function changeRole(Request $r, int $id, int $rol): Response
     {
-        if(!($request->getSession()->get('role') == 1)) {
+        if(!($r->getSession()->get('role') == 1)) {
             return $this->redirectToRoute('login');
         }
         $user = $this->ifEntity($id);

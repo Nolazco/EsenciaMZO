@@ -1,5 +1,5 @@
 {% form_theme form 'form/beer_theme.html.twig'  %}
-{{ form_start(form, { attr: { id: 'user_form' }}) }}
+{{ form_start(form, { attr: { id: 'gastro_form' }}) }}
 {% set logo = form.vars.value.logo is empty ? 'picture.svg' : form.vars.value.logo.getPathname() %}
 {% set menu = form.vars.value.menu is empty ? 'document.svg' : form.vars.value.menu.getPathname() %} 
 <div class="grid" style="display: flex; align-items: center; justify-content: center;"> {# Use Flexbox to center content #}

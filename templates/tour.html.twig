@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+{% block js %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+  
+{% endblock %}
+{% block css %}{% endblock %}
+{% block body %}
+  <main class="responsive">
+    <div class="grid justify-center align-center">
+      <div class="s12 flex justify-center align-center text-center my-mid2">
+        <a class="button app-back fill">Volver</a>
+        <h2>{{ tour.name }}</h2>
+        <div class="row">
+          <b>Descripción:</b>
+          <div class="max">{{ tour.desc }}</div>
+        </div>
+        <div class="medium-divider"></div>
+        <div class="row">
+          <b>Información:</b>
+          <div class="max">{{ tour.body }}</div>
+        </div>
+        <div class="medium-divider"></div>
+        <div class="row">
+          <b>Ubicación:</b>
+          <div class="max">{{ tour.location }}</div>
+        </div>
+        <div class="medium-divider"></div>
+
+        <img src="/{{tour.photo}}" alt="photo">
+      </div>
+    </div>
+  </main>
+{% endblock %}

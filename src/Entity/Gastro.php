@@ -45,6 +45,9 @@ class Gastro extends AbstractEntity{
     #[Column('location')]
     public string $location;
 
+    #[Column('date')]
+    public string $date;
+
     public function setId(int $id): static{
         $this->id = $id;
         return $this;
@@ -114,6 +117,15 @@ class Gastro extends AbstractEntity{
 
     public function getLocation(): string{
         return $this->location;
+    }
+
+    public function setDate(string $date): static{
+        $this->date = $date;
+        return $this;
+    }
+
+    public function getDate(): string{
+        return $this->date;
     }
 
     public function getMenuUri(): ?string

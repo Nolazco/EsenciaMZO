@@ -1,0 +1,101 @@
+{% extends 'visitor/base_visitor.html.twig' %}
+{% block title %}
+    {{ tour.name }}
+{% endblock %}
+{% block css %}
+  <link rel="stylesheet" type="text/css" href="/assets/tourStyle.css"/>
+  <link rel="stylesheet" type="text/css" href="/assets/commentBox.css"/>
+{% endblock %}
+{% block body %}
+  <!-------Banner Start------->
+    <section class="banner" style="background: url(/{{tour.photo}});" data-scroll-index='0'>
+      <div class="banner-overlay">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 col-sm-12">
+              <div class="banner-text">
+                <h2 class="white">{{tour.name}}</h2>
+                <h5 class="banner-text white">{{tour.desc}}</h5>
+                <p>Date of publication: <b>{{tour.date}}</b></p>
+                <p>Author: <b>{{ author.nickname ? author.nickname : author.name}}</b></p>
+                <div>
+                  <img style="border-radius: 50%; width: 5pc" src="/{{author.avatar}}" alt="author pic">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-12"> <img src="/{{tour.photo ? tour.photo : 'restaurant.svg'}}" class="img-fluid wow fadeInUp"/> </div>
+          </div>
+        </div>
+      </div>
+      <span class="svg-wave"> <img class="svg-wave" src="/images/wave.svg"> </span>
+    </section>
+
+      <!-------Banner End-------> 
+
+      <!-------About End------->
+
+      <section class="about section-padding prelative" data-scroll-index='1'>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="sectioner-header">
+                <h3 class="text-center">About</h3>
+                <span class="line"></span>
+                <p style="word-break: break-all; word-spacing: normal; white-space: pre-wrap;">{{tour.body}}</p>
+              </div>
+              <div class="section-content">
+                <div class="row">
+                  <div class="col-md-4">
+                    <p style="font-size: 20px">Location <b>{{ tour.location }}</b></p><br>
+                  </div>
+                  <div class="col-md-8 text-center">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-------About End-------> 
+
+        <!-------Contact Start------->
+        <section class="testimonial white section-padding" data-scroll-index='6' style="color: white;">
+          <div class="container" style="color: white;">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="sectioner-header-comments text-center" style="color: white;">
+                  <h3>Comments</h3>
+                  <span class="line"></span>
+                  <p>Share your opinion with us!!</p>
+                </div>
+                <div class="section-content">
+                  <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-8">
+                      <form id="contact_form" action="">
+                        <div class="row">
+                          <div class="comment-card w-100">
+                              <div class="comment-header">
+                                  <img src="https://via.placeholder.com/40" alt="User Avatar">
+                                  <span class="username">User123</span>
+                              </div>
+                              <div class="comment-body">
+                                  This is a sample comment to demonstrate a comment card with a purple color palette.
+                              </div>
+                              <div class="comment-footer">
+                                  <span>2 hours ago</span>
+                              </div>
+                          </div>
+
+                          <textarea class="form-input w-100 mt-5" {{loged == true ? '' : 'disable'}} id="message" placeholder="Message" name="message"></textarea>
+                          <button class="btn-grad w-100 text-uppercase" type="submit" name="button">submit</button>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-4">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+{% endblock %}

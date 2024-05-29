@@ -1,16 +1,209 @@
 {% extends 'visitor/base_visitor.html.twig' %}
+{% block title %}
+    {{ gastro.name }}
+{% endblock %}
 {% block css %}
   <link rel="stylesheet" type="text/css" href="/assets/gastroStyle.css"/>
+  <link rel="stylesheet" type="text/css" href="/assets/commentBox.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+  <style>
+    #pdf-viewer {
+        width: 80%;
+        height: 80%;
+        border: 2px solid #000;
+    }
+    canvas {
+        width: 100%;
+        height: auto;
+    }
+    #controls {
+        margin-bottom: 10px;
+    }
+    button {
+        margin-right: 5px;
+    }
+  </style>
 {% endblock %}
 {% block body %}
-  <main class="section-padding">
-    <article class="sectioner-header">
-        <h2 class="black">Blog Title</h2>
-        <p class="meta black">Posted on <time datetime="2024-05-28">May 28, 2024</time> by <a href="#">Author</a></p>
-        <p class="black">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque imperdiet purus a velit ultricies, ut lacinia purus sollicitudin. Mauris vehicula lacus sit amet est fringilla, at consectetur orci interdum.</p>
-        <h3 class="black">Subheading</h3>
-        <p class="black">Vivamus fermentum quam a elit vestibulum, nec dignissim nunc feugiat. Donec ac nisi nec eros ullamcorper consequat et in est.</p>
-        <p class="black">Suspendisse potenti. Phasellus luctus sapien non bibendum blandit. Donec posuere, augue at tincidunt dictum, libero nisl viverra ex, et scelerisque sem tortor ut nisl.</p>
-    </article>
-  </main>
+  <!-------Banner Start------->
+    <section class="banner" data-scroll-index='0'>
+      <div class="banner-overlay">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 col-sm-12">
+              <div class="banner-text">
+                <h2 class="white">{{gastro.name}}</h2>
+                <h5 class="banner-text white">{{gastro.desc}}</h5>
+                <p>Date of publication: <b>{{gastro.date}}</b></p>
+                <p>Author: <b>{{ author.nickname ? author.nickname : author.name}}</b></p>
+                <div>
+                  <img style="border-radius: 50%; width: 5pc" src="/{{author.avatar}}" alt="author pic">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-12"> <img src="/{{gastro.logo ? gastro.logo : 'restaurant.svg'}}" class="img-fluid wow fadeInUp"/> </div>
+          </div>
+        </div>
+      </div>
+      <span class="svg-wave"> <img class="svg-wave" src="/images/wave.svg"> </span>
+    </section>
+
+      <!-------Banner End-------> 
+
+      <!-------About End------->
+
+      <section class="about section-padding prelative" data-scroll-index='1'>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="sectioner-header">
+                <h3 class="text-center">About</h3>
+                <span class="line"></span>
+                <p style="word-break: break-all; word-spacing: normal; white-space: pre-wrap;">{{gastro.body}}</p>
+              </div>
+              <div class="section-content">
+                <div class="row">
+                  <div class="col-md-4">
+                    <p style="font-size: 20px">Location <b>{{ gastro.location }}</b></p><br>
+                    <p style="font-size: 20px">Home delivery? <b>{{ gastro.delivery == 1 ? 'Yes' : 'No' }}</b></p><br>
+                    {% if gastro.phone %}
+                      <p style="font-size: 20px">Phone number: <b>{{ gastro.phone }}</b></p>
+                    {% endif %}
+                    {% if gastro.menu %}
+                      <a class="btn-grad text-uppercase" style="text-decoration: none" href="/{{gastro.menu}}">Download menu</a>
+                    {% endif %}
+                  </div>
+                  <div class="col-md-8 text-center">
+                    {% if gastro.menu %}
+                      <div id="controls">
+                        <button class="btn-grad text-uppercase" id="prev-page">Previous</button>
+                        <span>Page: <span id="page-num"></span> / <span id="page-count"></span></span>
+                        <button class="btn-grad text-uppercase" id="next-page">Next</button>
+                      </div>
+                      <div id="pdf-viewer"></div>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-------About End-------> 
+
+        <!-------Contact Start------->
+        <section class="testimonial white section-padding" data-scroll-index='6' style="color: white;">
+          <div class="container" style="color: white;">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="sectioner-header-comments text-center" style="color: white;">
+                  <h3>Comments</h3>
+                  <span class="line"></span>
+                  <p>Share your opinion with us!!</p>
+                </div>
+                <div class="section-content">
+                  <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-8">
+                      <form id="contact_form" action="">
+                        <div class="row">
+                          <div class="comment-card w-100">
+                              <div class="comment-header">
+                                  <img src="https://via.placeholder.com/40" alt="User Avatar">
+                                  <span class="username">User123</span>
+                              </div>
+                              <div class="comment-body">
+                                  This is a sample comment to demonstrate a comment card with a purple color palette.
+                              </div>
+                              <div class="comment-footer">
+                                  <span>2 hours ago</span>
+                              </div>
+                          </div>
+
+                          <textarea class="form-input w-100 mt-5" {{loged == true ? '' : 'disable'}} id="message" placeholder="Message" name="message"></textarea>
+                          <button class="btn-grad w-100 text-uppercase" type="submit" name="button">submit</button>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-4">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <script>
+          var url = '/{{ gastro.menu }}';
+
+          var pdfjsLib = window['pdfjs-dist/build/pdf'];
+          pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js';
+
+          var pdfDoc = null,
+              pageNum = 1,
+              pageRendering = false,
+              pageNumPending = null,
+              scale = 1,
+              canvas = document.createElement('canvas'),
+              ctx = canvas.getContext('2d');
+
+          document.getElementById('pdf-viewer').appendChild(canvas);
+
+          function renderPage(num) {
+              pageRendering = true;
+              pdfDoc.getPage(num).then(function(page) {
+                  var viewport = page.getViewport({ scale: scale });
+                  canvas.height = viewport.height;
+                  canvas.width = viewport.width;
+
+                  var renderContext = {
+                      canvasContext: ctx,
+                      viewport: viewport
+                  };
+                  var renderTask = page.render(renderContext);
+
+                  renderTask.promise.then(function() {
+                      pageRendering = false;
+                      if (pageNumPending !== null) {
+                          renderPage(pageNumPending);
+                          pageNumPending = null;
+                      }
+                  });
+              });
+
+              document.getElementById('page-num').textContent = num;
+          }
+
+          function queueRenderPage(num) {
+              if (pageRendering) {
+                  pageNumPending = num;
+              } else {
+                  renderPage(num);
+              }
+          }
+
+          function onPrevPage() {
+              if (pageNum <= 1) {
+                  return;
+              }
+              pageNum--;
+              queueRenderPage(pageNum);
+          }
+
+          function onNextPage() {
+              if (pageNum >= pdfDoc.numPages) {
+                  return;
+              }
+              pageNum++;
+              queueRenderPage(pageNum);
+          }
+
+          document.getElementById('prev-page').addEventListener('click', onPrevPage);
+          document.getElementById('next-page').addEventListener('click', onNextPage);
+
+          pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
+              pdfDoc = pdfDoc_;
+              document.getElementById('page-count').textContent = pdfDoc.numPages;
+              renderPage(pageNum);
+          });
+        </script>
 {% endblock %}

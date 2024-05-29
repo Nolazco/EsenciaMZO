@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Gastro;
+use App\Entity\User;
 use App\Form\GastroForm;
 use App\Model\GastroRepo;
+use App\Model\UserRepo;
 use App\Service\MysqlStorage;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,9 +16,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class GastroManagement extends AbstractController{
     protected GastroRepo $gastroModel;
+    protected UserRepo $userModel;
 
     public function __construct(MysqlStorage $storage){
         $this->gastroModel = $storage->getModel(Gastro::class);
+        $this->userModel = $storage->getModel(User::class);
     }
 
     protected function ifEntity(int $id): Gastro{
@@ -27,7 +31,7 @@ class GastroManagement extends AbstractController{
         return $gastro;
     }
 
-    #[Route(name: 'gastronomia', path: '/gastronomia', methods: 'GET')]
+    #[Route(name: 'gastronomia', path: '/dashboard/gastronomia', methods: 'GET')]
     public function list(Request $request): Response {
         $page = $request->query->get('page', 1);
 
@@ -42,7 +46,7 @@ class GastroManagement extends AbstractController{
         ]);
     }
 
-    #[Route('/gastronomia/new', methods: ['GET', 'POST'])]
+    #[Route('/dashboard/gastronomia/new', methods: ['GET', 'POST'])]
     public function create(Request $request): Response {
         $gastro = new Gastro();
         $gastro->author = $request->getSession()->get('login');
@@ -57,8 +61,10 @@ class GastroManagement extends AbstractController{
                 $new_file = $gastro->menu->move('menus', uniqid().".{$gastro->menu->guessExtension()}");
                 $gastro->menu = $new_file;
             }
+            $gastro->date = date("d-m-Y");
+            //dd($gastro);
             $this->gastroModel->save($gastro);
-            return $this->redirectToRoute('gastronomia');
+            return $this->redirect('/dashboard/gastronomia');
         }
 
         return $this->render('gastro_edit.html.twig', [
@@ -67,14 +73,14 @@ class GastroManagement extends AbstractController{
         ]);
     }
 
-    #[Route('/gastronomia/details/{id}', methods: 'GET')]
+    #[Route('/dashboard/gastronomia/details/{id}', methods: 'GET')]
     public function details(Request $resquest, int $id): Response{
         $entity = $this->ifEntity($id);
 
         return $this->render('gastro.html.twig', ['gastro' => $entity]);
     }
 
-    #[Route('/gastronomia/{id}/edit', methods: ['GET', 'POST'])]
+    #[Route('/dashboard/gastronomia/{id}/edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, int $id): Response{
         $entity = $this->ifEntity($id);
         $form = $this->createForm(GastroForm::class, $entity);
@@ -86,27 +92,44 @@ class GastroManagement extends AbstractController{
             /** @var Gastro */
             $entity = $form->getData();
             $this->gastroModel->update($entity);
-            return $this->redirectToRoute('gastronomia');
+            return $this->redirect('/dashboard/gastronomia');
         }
 
         return $this->render('gastro_edit.html.twig', [
             'gastro' => $entity,
-            'form' => $form]);
+            'form' => $form]
+        );
     }
 
-    #[Route('/gastronomia/{id}/delete', methods: 'GET')]
+    #[Route('/dashboard/gastronomia/{id}/delete', methods: 'GET')]
     public function delete(Request $request, int $id): Response{
         $entity = $this->ifEntity($id);
+        unlink($entity->logo);
+        unlink($entity->menu);
         $this->gastroModel->delete($entity);
-        return $this->redirectToRoute('gastronomia');
+        return $this->redirect('/dashboard/gastronomia');
     }
 
     #[Route('/gastronomia/{id}', methods: 'GET')]
     public function seeMore(Request $r, int $id): Response{
         $entity = $this->ifEntity($id);
+        $author = $this->userModel->get($entity->author);
 
         return $this->render('visitor/gastro_see.html.twig', [
             'gastro' => $entity,
+            'author' => $author,
+            'rol' => $r->getSession()->has('login') ? $r->getSession()->get('role') : 0,
+            'name' => $r->getSession()->has('login') ? $r->getSession()->get('name') : 0,
+            'loged' => $r->getSession()->has('login') ? true : false
+        ]);
+    }
+
+    #[Route(name: 'gastronomy', path: '/gastronomy', methods: 'GET')]
+    public function gastronomy(Request $r): Response{
+        $entities = $this->gastroModel->getDesc();
+
+        return $this->render('/visitor/gastronomy.html.twig', [
+            'gastro' => $entities,
             'rol' => $r->getSession()->has('login') ? $r->getSession()->get('role') : 0,
             'name' => $r->getSession()->has('login') ? $r->getSession()->get('name') : 0,
             'loged' => $r->getSession()->has('login') ? true : false

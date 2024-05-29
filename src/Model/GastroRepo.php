@@ -14,6 +14,15 @@ class GastroRepo extends AbstractModel{
         return $data ?? null;
     }
 
+    public function getDesc(): ?array{
+        $data = $this->queryBind(
+            "SELECT * FROM {$this->getTable()} ORDER BY id DESC"
+        );
+
+        //dd($data);
+        return $data ?? null;
+    }
+
     public function getByAuthor(int $author, int $limit = 0, int $offset = 0, int $page = 0): ?array{
         $entity = new $this->entity();
         $entity->author = $author;

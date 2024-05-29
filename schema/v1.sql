@@ -26,7 +26,8 @@ create table if not exists gastro(
     delivery enum('1', '2') default '2' not null,
     phone varchar(15) default null,
     menu varchar(128) default null,
-    location varchar(255) not null
+    location varchar(255) not null,
+    date varchar(20) not null
 )engine=innodb;
 
 create table if not exists turismo(
@@ -35,7 +36,9 @@ create table if not exists turismo(
     author int(1) not null,
     description text not null,
     body text not null,
-    location varchar(255) not null
+    location varchar(255) not null,
+    photo varchar (128) default null,
+    date varchar(20) not null
 )engine=innodb;
 
  create table if not exists eventos(

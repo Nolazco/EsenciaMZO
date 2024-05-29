@@ -1,0 +1,56 @@
+{% extends 'visitor/base_visitor.html.twig' %}
+{% block title %}Tourism{% endblock %}
+{% block css %}
+  <link rel="stylesheet" type="text/css" href="/assets/gastroListStyle.css"/>
+{% endblock %}
+{% block body %}
+  <!-------Banner Start------->
+    <section class="banner" data-scroll-index='0'>
+      <div class="banner-overlay">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 col-sm-12">
+              <div class="banner-text">
+                <h2 class="white">Welcome <b>tourism</b> section!</h2>
+                <h5 class="banner-text white">Know the best places to walk around the city</h5>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-12"> <img style="border-radius: 50%;" src="https://hips.hearstapps.com/hmg-prod/images/gettyimages-918789438-1585262043.jpg" class="img-fluid wow fadeInUp"/> </div>
+          </div>
+        </div>
+      </div>
+      <span class="svg-wave"> <img class="svg-wave" src="/images/wave.svg"> </span> 
+    </section>
+
+        <!-------FAQ Start------->
+        <section class="faq section-padding prelative" data-scroll-index='4'>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="sectioner-header text-center">
+                  <h3>Recently added</h3>
+                  <span class="line"></span>
+                </div>
+                <div class="section-content text-center center">
+                  <div class="row">
+                  {% for t in tour %}
+                    <div class="col-md-6 faq-content wow fadeInUp" data-wow-delay="0.2s">
+                      <div class="card mb-3">
+                        <img class="card-img-top" src="/{{t.photo ? t.photo : 'restaurant.svg'}}" alt="Card image cap">
+                        <div class="card-body">
+                          <h5 class="card-title">{{t.name}}</h5>
+                          <p class="card-text">{{t.desc}}</p>
+                          <p class="card-text"><small class="text-muted">{{t.date}}</small></p>
+                          <a href="/turismo/{{t.id}}" style="text-decoration: none;" class="btn-grad text-uppercase">See more</a>
+                        </div>
+                      </div>
+                    </div>
+                  {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+{% endblock %}

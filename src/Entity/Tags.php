@@ -15,7 +15,7 @@ class Tags extends AbstractEntity{
     use ColumnHydrate;
 
     #[Column('id')]
-    public int $id;
+    public ?int $id;
 
     #[Column('tag')]
     public string $tag;
