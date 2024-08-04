@@ -8,6 +8,8 @@ use Lib\Storage\Annotations\Table;
 use Lib\Storage\Traits\AnnotationMappings;
 use Lib\Storage\Traits\ColumnHydrate;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\PasswordStrength;
 
 #[Table('users', UserRepo::class)]
 class User extends AbstractEntity{
@@ -32,6 +34,8 @@ class User extends AbstractEntity{
     #[Column('bio')]
     public string $bio;
 
+    #[Assert\NotCompromisedPassword(message: 'password.compromised')]
+    #[Assert\PasswordStrength([ 'minScore' => PasswordStrength::STRENGTH_MEDIUM ], message: 'password.weak')]
     #[Column('password')]
     public string $password;
 

@@ -12,79 +12,72 @@
     <!-- Font Google -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% block css %}{% endblock %}
-    {% block js %}
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script> 
-            <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script> 
-            <!-- scrollIt js --> 
-            <script src="/assets/scrollIt.min.js"></script> 
-            <script src="/assets/wow.min.js"></script> 
-            <script>
-             wow = new WOW();
-             wow.init();
-             $(document).ready(function(e) {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script> 
+    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script> 
+    <!-- scrollIt js --> 
+    <script src="/assets/scrollIt.min.js"></script> 
+    <script src="/assets/wow.min.js"></script> 
+    <script>
+      wow = new WOW();
+      wow.init();
+      $(document).ready(function(e) {
+        $('#video-icon').on('click',function(e){
+        e.preventDefault();
+        $('.video-popup').css('display','flex');
+        $('.iframe-src').slideDown();
+        });
+        $('.video-popup').on('click',function(e){
+          var $target = e.target.nodeName;
+          var video_src = $(this).find('iframe').attr('src');
+          if($target != 'IFRAME'){
+            $('.video-popup').fadeOut();
+            $('.iframe-src').slideUp();
+            $('.video-popup iframe').attr('src'," ");
+            $('.video-popup iframe').attr('src',video_src);
+          }
+        });
 
-               $('#video-icon').on('click',function(e){
-                 e.preventDefault();
-                 $('.video-popup').css('display','flex');
-                 $('.iframe-src').slideDown();
-               });
-               $('.video-popup').on('click',function(e){
-                 var $target = e.target.nodeName;
-                 var video_src = $(this).find('iframe').attr('src');
-                 if($target != 'IFRAME'){
-                   $('.video-popup').fadeOut();
-                   $('.iframe-src').slideUp();
-                   $('.video-popup iframe').attr('src'," ");
-                   $('.video-popup iframe').attr('src',video_src);
-                 }
-               });
+        $('.slider').bxSlider({
+          pager: false
+        });
+      });
 
-               $('.slider').bxSlider({
-                 pager: false
-               });
-             });
+      $(window).on("scroll",function () {
+        var bodyScroll = $(window).scrollTop(),
+        navbar = $(".navbar");
 
-             $(window).on("scroll",function () {
+        if(bodyScroll > 50){
+          $('.navbar-logo img').attr('src','/images/logo-black.png');
+          navbar.addClass("nav-scroll");
+        }else{
+          $('.navbar-logo img').attr('src','/images/logo.png');
+          navbar.removeClass("nav-scroll");
+        }
+      });
+      $(window).on("load",function (){
+        var bodyScroll = $(window).scrollTop(),
+        navbar = $(".navbar");
 
-               var bodyScroll = $(window).scrollTop(),
-               navbar = $(".navbar");
+        if(bodyScroll > 50){
+          $('.navbar-logo img').attr('src','/images/logo-black.png');
+          navbar.addClass("nav-scroll");
+        }else{
+          $('.navbar-logo img').attr('src','/images/logo-white.png');
+          navbar.removeClass("nav-scroll");
+        }
 
-               if(bodyScroll > 50){
-                 $('.navbar-logo img').attr('src','/images/logo-black.png');
-                 navbar.addClass("nav-scroll");
-
-               }else{
-                 $('.navbar-logo img').attr('src','/images/logo.png');
-                 navbar.removeClass("nav-scroll");
-               }
-
-             });
-             $(window).on("load",function (){
-               var bodyScroll = $(window).scrollTop(),
-               navbar = $(".navbar");
-
-               if(bodyScroll > 50){
-                 $('.navbar-logo img').attr('src','/images/logo-black.png');
-                 navbar.addClass("nav-scroll");
-               }else{
-                 $('.navbar-logo img').attr('src','/images/logo-white.png');
-                 navbar.removeClass("nav-scroll");
-               }
-
-               $.scrollIt({
-
+      $.scrollIt({
         easing: 'swing',      // the easing function for animation
         scrollTime: 900,       // how long (in ms) the animation takes
         activeClass: 'active', // class given to the active nav element
         onPageChange: null,    // function(pageIndex) that is called when page is changed
         topOffset: -63
       });
-             });
-
-           </script>
-    {% endblock %}
+      });
+    </script>
+    {% block css %}{% endblock %}
+    {% block js %}{% endblock %}
   </head>
   <body class="light">
     <header>
@@ -94,6 +87,7 @@
           <a class="navbar-brand navbar-logo" href="/"> 
             <img src="/images/logo.png" alt="logo" class="logo-1"> 
           </a>
+          <button class="btn-grad text-uppercase" onclick="toogleStyle();" name="button">Change style</button>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> 
             <span class="fas fa-bars"></span> 
           </button>

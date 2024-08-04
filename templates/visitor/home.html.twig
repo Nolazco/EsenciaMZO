@@ -1,7 +1,19 @@
 {% extends 'visitor/base_visitor.html.twig' %}
 {% block title %}Manzanillo's Essence{% endblock %}
 {% block css %}
-  <link rel="stylesheet" type="text/css" href="/assets/style.css"/>
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" id="styles" />
+{% endblock %}
+{% block js %}
+    <script>
+      function toogleStyle() {
+        var stylesCSS = document.getElementById('styles');
+        if (stylesCSS.href.includes('/assets/style.css')) {
+          stylesCSS.href = '/assets/style_alt.css';
+        } else {
+          stylesCSS.href = '/assets/style.css';
+        }
+      }
+    </script>
 {% endblock %}
 {% block body %}
   <!-------Banner Start------->
