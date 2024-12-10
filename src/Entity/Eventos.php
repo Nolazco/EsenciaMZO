@@ -25,7 +25,7 @@ class Eventos extends AbstractEntity{
     public int $author;
 
     #[Column('description')]
-    public string $desc;
+    public string $description;
 
     #[Column('body')]
     public string $body;
@@ -40,7 +40,7 @@ class Eventos extends AbstractEntity{
     public string $date;
 
     #[Column('dateOfEvent')]
-    public string $doe;
+    public string $dateOfEvent;
 
     #[Column('mainPicture', 'getMainUri', 'setMainFromUri')]
     public ?File $main = null;
@@ -72,12 +72,12 @@ class Eventos extends AbstractEntity{
         return $this->author;
     }
 
-    public function setDesc(string $desc): static {
-        $this->desc = $desc;
+    public function setDesc(string $description): static {
+        $this->description = $description;
         return $this;
     }
     public function getDesc(): string {
-        return $this->desc;
+        return $this->description;
     }
 
     public function setBody(string $body): static{
@@ -116,13 +116,13 @@ class Eventos extends AbstractEntity{
         return $this->date;
     }
 
-    public function setDOE(string $doe): static{
-        $this->doe = $doe;
+    public function setDOE(string $dateOfEvent): static{
+        $this->dateOfEvent = $dateOfEvent;
         return $this;
     }
 
     public function getDOE(): string{
-        return $this->doe;
+        return $this->dateOfEvent;
     }
 
     public function getAttachUri(): ?string

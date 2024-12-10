@@ -1,8 +1,8 @@
 {% extends 'visitor/base_visitor.html.twig' %}
 {% if official == true %}
-  {%set txt = {'title': 'Official events', 'text': 'Cultural events organized and disseminated by the government of Manzanillo', 'photo': 'https://manzanillo.gob.mx/assets/img/escudo_manzanillo.png'}%}
+  {%set txt = {'title': 'Official events', 'text': 'Cultural events organized and disseminated by the government of Manzanillo', 'photo': '/images/escudo.webp'}%}
 {% elseif official == false %}
-  {%set txt = {'title': 'Unfficial events', 'text': 'Events organized by the citizens of Manzanillo', 'photo': 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Montaje_de_Manzanillo.jpg/1200px-Montaje_de_Manzanillo.jpg'}%}
+  {%set txt = {'title': 'Unfficial events', 'text': 'Events organized by the citizens of Manzanillo', 'photo': '/images/otro.jpg'}%}
 {% endif %}
 {% block title %}{{ official == true ? 'Official' : 'Unofficial'}} events{% endblock %}
 {% block css %}
@@ -20,7 +20,7 @@
                 <h5 class="banner-text white">{{txt['text']}}</h5>
               </div>
             </div>
-            <div class="col-md-4 col-sm-12"> <img style="border-radius: 50%;" src="{{txt['photo']}}" class="img-fluid wow fadeInUp"/> </div>
+            <div class="col-md-4 col-sm-12"> <img style="border-radius: 50%; width: 15pc;" src="{{txt['photo']}}" class="img-fluid wow fadeInUp"/> </div>
           </div>
         </div>
       </div>

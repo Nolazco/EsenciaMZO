@@ -102,7 +102,13 @@
               <li class="nav-item"> <a class="nav-link" href="/">Home</a> </li>
               <li class="nav-item"> <a class="nav-link" href="/gastronomy">Gastronomy</a> </li>
               <li class="nav-item"> <a class="nav-link" href="/tourism">Tourism</a> </li>
-              <li class="nav-item"> <a class="nav-link" href="#">Events</a> </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-scroll-nav="7.">Events</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a style="color: black;" class="dropdown-item" href="/events/official">Official</a>
+                  <a style="color: black;" class="dropdown-item" href="/events/unofficial">Unofficial</a>
+                </div>
+              </li>
               <li class="nav-item dropdown">
               {% if (loged == true and rol == '1') or (loged == true and rol == '2') %} 
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-scroll-nav="7.">¡Hi {{name}}!</a>

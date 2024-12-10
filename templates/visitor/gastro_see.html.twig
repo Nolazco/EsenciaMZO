@@ -35,16 +35,16 @@
                 <h2 class="white">{{gastro.name}}</h2>
                 <h5 class="banner-text white">{{gastro.desc}}</h5>
                 <p>Date of publication: <b>{{gastro.date}}</b></p>
-                <p>Author: <b>{{ author.nickname ? author.nickname : author.name}}</b></p>
-                <div>
-                  <img style="border-radius: 50%; width: 5pc" src="/{{author.avatar}}" alt="author pic">
-                </div>
+                <p>
+                  Author: <b>{{ author.nickname ? author.nickname : author.name}}</b>
+                  <img style="border-radius: 50%; width: 5pc;" src="/{{author.avatar ? author.avatar : './user-default.svg'}}" alt="author pic">
+                </p> 
               </div>
             </div>
             <div class="col-md-4 col-sm-12"> <img src="/{{gastro.logo ? gastro.logo : 'restaurant.svg'}}" class="img-fluid wow fadeInUp"/> </div>
           </div>
         </div>
-      </div>
+      </div><br>
       <span class="svg-wave"> <img class="svg-wave" src="/images/wave.svg"> </span>
     </section>
 
@@ -100,33 +100,7 @@
                   <span class="line"></span>
                   <p>Share your opinion with us!!</p>
                 </div>
-                <div class="section-content">
-                  <div class="row">
-                    <div class="col-sm-12 col-md-12 col-lg-8">
-                      <form id="contact_form" action="">
-                        <div class="row">
-                          <div class="comment-card w-100">
-                              <div class="comment-header">
-                                  <img src="https://via.placeholder.com/40" alt="User Avatar">
-                                  <span class="username">User123</span>
-                              </div>
-                              <div class="comment-body">
-                                  This is a sample comment to demonstrate a comment card with a purple color palette.
-                              </div>
-                              <div class="comment-footer">
-                                  <span>2 hours ago</span>
-                              </div>
-                          </div>
-
-                          <textarea class="form-input w-100 mt-5" {{loged == true ? '' : 'disable'}} id="message" placeholder="Message" name="message"></textarea>
-                          <button class="btn-grad w-100 text-uppercase" type="submit" name="button">submit</button>
-                        </div>
-                      </form>
-                    </div>
-                    <div class="col-sm-12 col-md-12 col-lg-4">
-                    </div>
-                  </div>
-                </div>
+                {% include 'visitor/comment_section.html.twig' %}
               </div>
             </div>
           </div>

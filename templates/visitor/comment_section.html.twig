@@ -1,0 +1,27 @@
+<div class="section-content">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-8">
+      <form id="contact_form" action="">
+        <div class="row">
+          <div class="comment-card w-100">
+              <div class="comment-header">
+                  <img src="https://via.placeholder.com/40" alt="User Avatar">
+                  <span class="username">User123</span>
+              </div>
+              <div class="comment-body">
+                  This is a sample comment.
+              </div>
+              <div class="comment-footer">
+                  <span>2 hours ago</span>
+              </div>
+          </div>
+
+          <textarea class="form-input w-100 mt-5" {{loged == true ? '' : 'disabled'}} id="message" name="message">{{loged == true ? 'Message' : 'Log in to comment'}}</textarea>
+          {{loged == true ? '<button class="btn-grad w-100 text-uppercase border" type="submit" name="button">submit</button>' : ''}}
+        </div>
+      </form>
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-4">
+    </div>
+  </div>
+</div>

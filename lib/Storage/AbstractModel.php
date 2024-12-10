@@ -126,9 +126,9 @@ abstract class AbstractModel
     /**
      * Save the entity
      *
-     * @return bool
+     * @return array|bool
      */
-    public function save(AbstractEntity $entity): bool
+    public function save(AbstractEntity $entity): bool|array
     {
         $mappings = $entity->excludeMappigns(['id']);
         $query = "INSERT INTO {$this->getTable()}";
@@ -139,13 +139,19 @@ abstract class AbstractModel
         $values = array_map(fn ($n) => ":$n", array_keys($mappings));
         $query .= 'VALUES (' . implode(',', $values) . ')';
 
-        if ($this->queryBind($query, $entity, $mappings) !== false) {
-            $entity->id = $this->db->lastInsertId();
-            return true;
+        try {
+            if ($this->queryBind($query, $entity, $mappings) !== false) {
+                $entity->id = $this->db->lastInsertId();
+                return true;
+            }
+            // Si la consulta falla pero no lanza una excepción
+            return ['error' => $this->db->errorInfo()];
+        } catch (\PDOException $e) {
+            // Capturar errores de PDO
+            return ['error' => $e->getMessage()];
         }
-
-        return false;
     }
+
 
     /**
      * Update the data in the entity

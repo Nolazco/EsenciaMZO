@@ -59,16 +59,17 @@ class EventosManagement extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()){
             if(!empty($event->main)){
-                $new_file = $event->main->move('events_main_photos', uniqid().".{$event->main->guessExtension()}");
-                $event->main = $new_file;
+                $main_file = $event->main->move('events_main_photos', uniqid().".{$event->main->guessExtension()}");
+                $event->main = $main_file;
             }
             if(!empty($event->attach)){
-                $new_file = $event->attach->move('events_attachments', uniqid().".{$event->attach->guessExtension()}");
-                $event->attach = $new_file;
+                $attach_file = $event->attach->move('events_attachments', uniqid().".{$event->attach->guessExtension()}");
+                $event->attach = $attach_file;
             }
             $event->date = date("d-m-Y");
-
-            $this->eventsModel->save($event);
+            //$event->dateOfEvent = date("d-m-Y");
+            //dd($event);
+            //dd($this->eventsModel->save($event));
             return $this->redirect('/dashboard/events');
         }
 

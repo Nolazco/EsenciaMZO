@@ -8,21 +8,22 @@
 {% endblock %}
 {% block body %}
   <!-------Banner Start------->
-    <section class="banner" style="background: url(/{{tour.photo}});" data-scroll-index='0'>
+    <section class="banner" style="background: url(/{{tour.photo}}); background-size: cover; background-repeat: no-repeat;" data-scroll-index='0'>
       <div class="banner-overlay">
         <div class="container">
           <div class="row">
-            <div class="col-md-8 col-sm-12">
+            <div style="background: rgb(179,179,179);background: linear-gradient(90deg, rgba(179,179,179,1) 0%, rgba(184,0,255,0.2805497198879552) 100%);" class="col-md-4 col-sm-12">
               <div class="banner-text">
                 <h2 class="white">{{tour.name}}</h2>
                 <h5 class="banner-text white">{{tour.desc}}</h5>
                 <p>Date of publication: <b>{{tour.date}}</b></p>
-                <p>Author: <b>{{ author.nickname ? author.nickname : author.name}}</b></p>
-                <div>
-                  <img style="border-radius: 50%; width: 5pc" src="/{{author.avatar}}" alt="author pic">
-                </div>
+                <p>
+                  Author: <b>{{ author.nickname ? author.nickname : author.name}}</b>
+                  <img style="border-radius: 50%; width: 5pc;" src="/{{author.avatar ? author.avatar : './user-default.svg'}}" alt="author pic">
+                </p> 
               </div>
             </div>
+            <div class="col-md-4 col-sm-12"></div>
             <div class="col-md-4 col-sm-12"> <img src="/{{tour.photo ? tour.photo : 'restaurant.svg'}}" class="img-fluid wow fadeInUp"/> </div>
           </div>
         </div>
@@ -67,33 +68,7 @@
                   <span class="line"></span>
                   <p>Share your opinion with us!!</p>
                 </div>
-                <div class="section-content">
-                  <div class="row">
-                    <div class="col-sm-12 col-md-12 col-lg-8">
-                      <form id="contact_form" action="">
-                        <div class="row">
-                          <div class="comment-card w-100">
-                              <div class="comment-header">
-                                  <img src="https://via.placeholder.com/40" alt="User Avatar">
-                                  <span class="username">User123</span>
-                              </div>
-                              <div class="comment-body">
-                                  This is a sample comment to demonstrate a comment card with a purple color palette.
-                              </div>
-                              <div class="comment-footer">
-                                  <span>2 hours ago</span>
-                              </div>
-                          </div>
-
-                          <textarea class="form-input w-100 mt-5" {{loged == true ? '' : 'disable'}} id="message" placeholder="Message" name="message"></textarea>
-                          <button class="btn-grad w-100 text-uppercase" type="submit" name="button">submit</button>
-                        </div>
-                      </form>
-                    </div>
-                    <div class="col-sm-12 col-md-12 col-lg-4">
-                    </div>
-                  </div>
-                </div>
+                {% include 'visitor/comment_section.html.twig' %}
               </div>
             </div>
           </div>
